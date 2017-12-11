@@ -1,0 +1,75 @@
+{
+  "name": "taskmanager",
+  "jest": {
+    "verbose": true,
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/node_modules/**",
+      "!**/dist/**"
+    ],
+    "coverageDirectory": "./coverage",
+    "coveragePathIgnorePatterns": [
+      "./dist/",
+      "./node_modules/",
+      "./src/bin",
+      "./coverage"
+    ]
+  },
+  "version": "0.0.1",
+  "description": "Task manager web application",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest",
+    "babel-node": "babel-node",
+    "eslint": "eslint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VladVes/project-lvl4-s131.git"
+  },
+  "keywords": [
+    "Task",
+    "manager"
+  ],
+  "author": "Vladimir Veselov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VladVes/project-lvl4-s131/issues"
+  },
+  "homepage": "https://github.com/VladVes/project-lvl4-s131#readme",
+  "dependencies": {
+    "babel-cli": "*",
+    "babel-core": "*",
+    "babel-loader": "*",
+    "babel-polyfill": "*",
+    "babel-preset-env": "*",
+    "babel-preset-flow": "*",
+    "babel-preset-stage-0": "*",
+    "debug": "*",
+    "lodash": "^4.17.4",
+    "koa": "*",
+    "koa-bodyparser": "*",
+    "koa-flash-simple": "*",
+    "koa-generic-session": "*",
+    "koa-logger": "*",
+    "koa-methodoverride": "*",
+    "koa-pug": "3.0.0-2",
+    "koa-router": "next",
+    "koa-static": "*",
+    "koa-webpack": "*"
+  },
+  "devDependencies": {
+    "babel-eslint": "*",
+    "eslint": "*",
+    "eslint-config-airbnb-base": "*",
+    "eslint-plugin-flowtype": "*",
+    "eslint-plugin-import": "*",
+    "eslint-plugin-jest": "*",
+    "jest": "*",
+    "jest-supertest-matchers": "*",
+    "nodemon": "*",
+    "supertest": "*",
+    "nock": "^9.1.0"
+  }
+}
