@@ -1,4 +1,3 @@
 {
-	"presets": ["env", "stage-0"],
-	"plugin": ["@babel/plugin-syntax-throw-expression"]
+	"presets": ["env", "stage-0"]
 }
