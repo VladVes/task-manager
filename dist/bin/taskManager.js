@@ -7,4 +7,4 @@ var _2 = _interopRequireDefault(_);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_2.default.run();
+(0, _2.default)().listen();

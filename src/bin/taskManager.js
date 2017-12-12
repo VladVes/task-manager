@@ -2,4 +2,4 @@
 
 import app from '../';
 
-app.run();
+app().listen();
