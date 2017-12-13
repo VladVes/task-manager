@@ -27,8 +27,7 @@
     "babel-node": "babel-node",
     "eslint": "eslint",
     "build": "NODE_ENV=production babel src --out-dir dist --source-map inline",
-    "start": "",
-    "eslint": "eslint"
+    "start": ""
   },
   "repository": {
     "type": "git",
@@ -53,7 +52,6 @@
     "babel-preset-flow": "*",
     "babel-preset-stage-0": "*",
     "debug": "*",
-    "lodash": "^4.17.4",
     "koa": "*",
     "koa-bodyparser": "*",
     "koa-flash-simple": "*",
@@ -63,7 +61,9 @@
     "koa-pug": "3.0.0-2",
     "koa-router": "next",
     "koa-static": "*",
-    "koa-webpack": "*"
+    "koa-webpack": "*",
+    "lodash": "^4.17.4",
+    "rollbar": "^2.3.2"
   },
   "devDependencies": {
     "babel-eslint": "*",
