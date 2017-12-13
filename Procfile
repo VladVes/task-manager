@@ -1,1 +1,1 @@
-web: node make start
+web: make start
