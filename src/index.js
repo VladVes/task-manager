@@ -10,6 +10,7 @@ export default () => {
 
   app.use(async (ctx, next) => {
     try {
+      rollbar.log('Starting application...');
       await next();
     } catch (err) {
       rollbar.error(err, ctx.request);
