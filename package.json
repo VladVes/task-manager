@@ -22,6 +22,9 @@
   "bin": {
     "taskmgr": "dist/bin/taskManager.js"
   },
+  "engines": {
+    "node": "8"
+  },
   "scripts": {
     "test": "jest",
     "babel-node": "babel-node",
