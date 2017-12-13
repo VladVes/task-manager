@@ -30,7 +30,7 @@
     "babel-node": "babel-node",
     "eslint": "eslint",
     "build": "NODE_ENV=production babel src --out-dir dist --source-map inline",
-    "start": ""
+    "start": "babel-node -- 'src/bin/taskManager.js'"
   },
   "repository": {
     "type": "git",
