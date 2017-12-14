@@ -30,7 +30,9 @@
     "babel-node": "babel-node",
     "eslint": "eslint",
     "build": "NODE_ENV=production babel src --out-dir dist --source-map inline",
-    "start": "babel-node -- 'src/bin/taskManager.js'"
+    "start": "babel-node -- 'src/bin/taskManager.js'",
+    "webpack": "webpack -p",
+    "watch": "webpack --watch"
   },
   "repository": {
     "type": "git",
@@ -54,6 +56,8 @@
     "babel-preset-env": "*",
     "babel-preset-flow": "*",
     "babel-preset-stage-0": "*",
+    "bootstrap": "^3.3.7",
+    "css-loader": "^0.28.7",
     "debug": "*",
     "koa": "*",
     "koa-bodyparser": "*",
@@ -66,7 +70,10 @@
     "koa-static": "*",
     "koa-webpack": "*",
     "lodash": "^4.17.4",
-    "rollbar": "^2.3.2"
+    "moment": "^2.19.4",
+    "rollbar": "^2.3.2",
+    "style-loader": "^0.19.1",
+    "webpack": "^3.10.0"
   },
   "devDependencies": {
     "babel-eslint": "*",

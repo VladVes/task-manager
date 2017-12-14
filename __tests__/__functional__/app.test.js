@@ -3,7 +3,7 @@ import matchers from 'jest-supertest-matchers';
 
 import app from '../../src/';
 
-describe('base functionality', () => {
+describe('base requests', () => {
   let server;
 
   beforeAll(() => {
