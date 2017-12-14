@@ -29,10 +29,11 @@
     "test": "jest",
     "babel-node": "babel-node",
     "eslint": "eslint",
-    "build": "NODE_ENV=production babel src --out-dir dist --source-map inline",
+    "build": "npm run webpack -- -p --env production && babel src --out-dir dist --source-map inline",
     "start": "babel-node -- 'src/bin/taskManager.js'",
-    "webpack": "webpack -p",
-    "watch": "webpack --watch"
+    "webpack": "webpack",
+    "watch": "webpack --watch",
+    "postinstall": "npm run build",
   },
   "repository": {
     "type": "git",
@@ -56,7 +57,7 @@
     "babel-preset-env": "*",
     "babel-preset-flow": "*",
     "babel-preset-stage-0": "*",
-    "bootstrap": "^3.3.7",
+    "bootstrap": "4.0.0-beta",
     "css-loader": "^0.28.7",
     "debug": "*",
     "koa": "*",
