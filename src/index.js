@@ -4,6 +4,8 @@ import Router from 'koa-router';
 import session from 'koa-generic-session';
 import flash from 'koa-flash-simple';
 import bodyParser from 'koa-bodyparser';
+import methodOverride from 'koa-methodoverride';
+import serv from 'koa-static';
 
 import addRoutes from './routes'
 
@@ -26,6 +28,13 @@ export default () => {
     }
   });
   app.use(bodyParser());
+  app.use(methodOverride((req) => {
+    if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+      return req.body._method;
+    }
+    return null;
+  }));
+  
 
   const router = new Router();
   addRoutes(router);
