@@ -74,6 +74,8 @@
     "koa-webpack": "*",
     "lodash": "^4.17.4",
     "moment": "^2.19.4",
+    "popper": "^1.0.1",
+    "postcss-loader": "^2.0.9",
     "rollbar": "^2.3.2",
     "style-loader": "^0.19.1",
     "webpack": "^3.10.0"
