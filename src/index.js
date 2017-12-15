@@ -6,6 +6,7 @@ import flash from 'koa-flash-simple';
 import bodyParser from 'koa-bodyparser';
 import methodOverride from 'koa-methodoverride';
 import serve from 'koa-static';
+import koaLogger from 'koa-logger';
 
 import addRoutes from './routes';
 import getWebpackConfig from '../webpack.config.babel';
@@ -43,6 +44,7 @@ export default () => {
     }));
   }
 
+  app.use(koaLogger());
   const router = new Router();
   addRoutes(router);
   app.use(router.allowedMethods());
