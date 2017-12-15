@@ -1,7 +1,7 @@
 install:
 	npm install
 
-start:
+server:
 	npm run babel-node -- 'src/bin/taskManager.js'
 
 test:
