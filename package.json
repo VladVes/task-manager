@@ -52,6 +52,7 @@
   },
   "homepage": "https://github.com/VladVes/project-lvl4-s131#readme",
   "dependencies": {
+    "autoprefixer": "^7.2.3",
     "babel-cli": "*",
     "babel-core": "*",
     "babel-loader": "*",
