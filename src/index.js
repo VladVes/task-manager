@@ -3,6 +3,7 @@ import Rollbar from 'rollbar';
 import Router from 'koa-router';
 import session from 'koa-generic-session';
 import flash from 'koa-flash-simple';
+import bodyparser from 'koa-bodyparser';
 
 import addRoutes from './routes'
 
@@ -24,6 +25,7 @@ export default () => {
       rollbar.error(err, ctx.request);
     }
   });
+  app.use(bodyParser());
 
   const router = new Router();
   addRoutes(router);
