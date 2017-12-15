@@ -1,6 +1,7 @@
 import 'babel-polyfill';
 
 import path from 'path';
+import _ from 'lodash';
 import Koa from 'koa';
 import Rollbar from 'rollbar';
 import Router from 'koa-router';
@@ -10,6 +11,7 @@ import bodyParser from 'koa-bodyparser';
 import methodOverride from 'koa-methodoverride';
 import serve from 'koa-static';
 import koaLogger from 'koa-logger';
+import Pug from 'koa-pug';
 
 import addRoutes from './routes';
 import getWebpackConfig from '../webpack.config.babel';
