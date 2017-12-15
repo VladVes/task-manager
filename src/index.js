@@ -5,7 +5,7 @@ import session from 'koa-generic-session';
 import flash from 'koa-flash-simple';
 import bodyParser from 'koa-bodyparser';
 import methodOverride from 'koa-methodoverride';
-import serv from 'koa-static';
+import serve from 'koa-static';
 
 import addRoutes from './routes'
 
@@ -34,7 +34,7 @@ export default () => {
     }
     return null;
   }));
-  
+  app.use(serve(path.join(__dirname, '..', 'public')));
 
   const router = new Router();
   addRoutes(router);
