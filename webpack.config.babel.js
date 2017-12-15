@@ -20,23 +20,18 @@ export default () => ({
       },
       {
         test: /\.css$/,
-        use: ['style-loader',
-         { loader: 'css-loader', options: { importLoaders: 1 } },
-         {
+        use: [
+          'style-loader',
+          { loader: 'css-loader', options: { importLoaders: 1 } },
+          {
            loader: 'postcss-loader',
            options: {
-             ident: 'postcss',
-             parser: 'sugarss',
-             syntax: 'sugarss',
-             exec: true,
-             plugins: (loader) => [
-              require('postcss-import')({ root: loader.resourcePath }),
-              require('postcss-cssnext')(),
-              require('autoprefixer')(),
-              require('cssnano')()
-            ],
+             plugins: () => [
+               require('precss'),
+               require('autoprefixer')()
+             ],
            },
-         },
+          },
         ],
       },
     ],

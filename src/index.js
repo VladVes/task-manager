@@ -45,9 +45,12 @@ export default () => {
   app.use(serve(path.join(__dirname, '..', 'public')));
 
   if (process.env.NODE_ENV !== 'test') {
-    app.use(middleware({
+      app.use(middleware({
       config: getWebpackConfig(),
     }));
+  } else {
+    console.log('runnig in test env.');
+    console.log('listen on port == ', process.env.PORT);
   }
 
   app.use(koaLogger());

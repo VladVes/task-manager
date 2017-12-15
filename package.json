@@ -79,9 +79,13 @@
     "moment": "^2.19.4",
     "popper": "^1.0.1",
     "popper.js": "^1.12.9",
+    "postcss-import": "^11.0.0",
     "postcss-loader": "^2.0.9",
+    "precss": "^2.0.0",
     "rollbar": "^2.3.2",
     "style-loader": "^0.19.1",
+    "sugarcss": "^1.0.3",
+    "sugarss": "^1.0.1",
     "webpack": "^3.10.0"
   },
   "devDependencies": {
