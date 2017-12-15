@@ -1,4 +1,5 @@
 import path from 'path';
+import webpack from 'webpack';
 
 export default () => ({
   entry: {
@@ -8,6 +9,7 @@ export default () => ({
   output: {
     filename: 'application.js',
     path: path.join(__dirname, 'public', 'assets'),
+    publicPath: '/assets/',
   },
   module: {
     rules: [

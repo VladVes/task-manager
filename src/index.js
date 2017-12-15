@@ -6,6 +6,7 @@ import Koa from 'koa';
 import Rollbar from 'rollbar';
 import Router from 'koa-router';
 import session from 'koa-generic-session';
+import middleware from 'koa-webpack';
 import flash from 'koa-flash-simple';
 import bodyParser from 'koa-bodyparser';
 import methodOverride from 'koa-methodoverride';
@@ -26,7 +27,7 @@ export default () => {
     try {
       rollbar.log('Starting application...');
       ctx.state = {
-        flash: ctx.falsh,
+        flash: ctx.flash,
         isSignedIn: () => ctx.session.userId !== undefined,
       };
       await next();
