@@ -7,7 +7,8 @@ import bodyParser from 'koa-bodyparser';
 import methodOverride from 'koa-methodoverride';
 import serve from 'koa-static';
 
-import addRoutes from './routes'
+import addRoutes from './routes';
+import getWebpackConfig from '../webpack.config.babel';
 
 export default () => {
   const app = new Koa();
@@ -35,6 +36,12 @@ export default () => {
     return null;
   }));
   app.use(serve(path.join(__dirname, '..', 'public')));
+
+  if (process.env.NODE_ENV !== 'test') {
+    app.use(middleware({
+      config: getWebpackConfig(),
+    }));
+  }
 
   const router = new Router();
   addRoutes(router);
