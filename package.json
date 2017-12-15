@@ -1,5 +1,14 @@
 {
   "name": "taskmanager",
+  "version": "0.0.1",
+  "description": "Task manager web application",
+  "main": "dist/index.js",
+  "bin": {
+    "taskmgr": "dist/bin/taskManager.js"
+  },
+  "engines": {
+    "node": "8"
+  },
   "jest": {
     "verbose": true,
     "collectCoverage": true,
@@ -13,17 +22,10 @@
       "./dist/",
       "./node_modules/",
       "./src/bin",
+      "./public/assets",
+      "webpack.config.babel.js",
       "./__coverage"
     ]
-  },
-  "version": "0.0.1",
-  "description": "Task manager web application",
-  "main": "dist/index.js",
-  "bin": {
-    "taskmgr": "dist/bin/taskManager.js"
-  },
-  "engines": {
-    "node": "8"
   },
   "scripts": {
     "test": "jest",
@@ -33,7 +35,7 @@
     "start": "babel-node -- 'src/bin/taskManager.js'",
     "webpack": "webpack",
     "watch": "webpack --watch",
-    "postinstall": "npm run build",
+    "postinstall": "npm run build"
   },
   "repository": {
     "type": "git",
