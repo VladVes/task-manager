@@ -1,3 +1,6 @@
+import 'babel-polyfill';
+
+import path from 'path';
 import Koa from 'koa';
 import Rollbar from 'rollbar';
 import Router from 'koa-router';
@@ -50,5 +53,17 @@ export default () => {
   app.use(router.allowedMethods());
   app.use(router.routes());
 
+  const pug = new Pug({
+    viewPath: path.join(__dirname, '..', 'views'),
+    debug: true,
+    compileDebug: true,
+    locals: [],
+    basedir: path.join(__dirname, '..', 'views'),
+    helperPath: [
+      { _ },
+      { urlFor: (...args) => router.url(...args) },
+    ],
+  });
+  pug.use(app);
   return app;
 };
