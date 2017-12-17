@@ -38,6 +38,7 @@ export default () => {
       };
       await next();
     } catch (err) {
+      log('Error: ', err);
       rollbar.error(err, ctx.request);
     }
   });
@@ -55,10 +56,10 @@ export default () => {
       config: getWebpackConfig(),
     }));
   } else {
-    console.log('runnig in test env.');
-    console.log('starting nodemon...')
-    console.log('listen on port == ', process.env.PORT);
+     log('starting nodemon...');
   }
+  log(`runnig in ${process.env.NODE_ENV} environment`);
+  log(`listen on port == ${process.env.PORT}`);
 
   app.use(koaLogger());
   const router = new Router();
