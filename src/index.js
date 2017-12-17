@@ -22,7 +22,7 @@ export default () => {
   const app = new Koa();
   const rollbar = new Rollbar('d127b6e52cdd4ebcaea93d684c756d7e');
 
-  dotenv.config();
+  const env = dotenv.config();
 
   app.use(session(app));
   app.use(flash());
@@ -53,6 +53,7 @@ export default () => {
     }));
   } else {
     console.log('runnig in test env.');
+    console.log('starting nodemon...')
     console.log('listen on port == ', process.env.PORT);
   }
 

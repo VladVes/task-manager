@@ -33,6 +33,7 @@
     "eslint": "eslint",
     "build": "npm run webpack -- -p --env production && babel src --out-dir dist --source-map inline",
     "start": "babel-node -- 'src/bin/taskManager.js'",
+    "nodemon": "nodemon",
     "webpack": "webpack",
     "watch": "webpack --watch",
     "postinstall": "npm run build"

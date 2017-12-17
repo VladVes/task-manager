@@ -1,0 +1,4 @@
+{
+  "verbose": true,
+  "ingonre": ["dist", "node_modules", "public", "__coverage", "__tests__"]
+}
