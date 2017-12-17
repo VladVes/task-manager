@@ -13,6 +13,7 @@ import methodOverride from 'koa-methodoverride';
 import serve from 'koa-static';
 import koaLogger from 'koa-logger';
 import Pug from 'koa-pug';
+import dotenv from 'dotenv';
 
 import addRoutes from './routes';
 import getWebpackConfig from '../webpack.config.babel';
@@ -20,6 +21,8 @@ import getWebpackConfig from '../webpack.config.babel';
 export default () => {
   const app = new Koa();
   const rollbar = new Rollbar('d127b6e52cdd4ebcaea93d684c756d7e');
+
+  dotenv.config();
 
   app.use(session(app));
   app.use(flash());
