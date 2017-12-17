@@ -2,7 +2,7 @@ install:
 	npm install
 
 start:
-	npm run nodemon -- --watch . --ext '.js' --exec  babel-node -- 'src/bin/taskManager.js'
+	DEBUG="TaskManager:*" npm run nodemon -- --watch . --ext '.js' --exec  babel-node -- 'src/bin/taskManager.js'
 
 test:
 	npm test

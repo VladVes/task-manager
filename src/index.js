@@ -16,6 +16,7 @@ import Pug from 'koa-pug';
 import dotenv from 'dotenv';
 
 import addRoutes from './routes';
+import getLogger from './lib/log';
 import getWebpackConfig from '../webpack.config.babel';
 
 export default () => {
@@ -23,12 +24,14 @@ export default () => {
   const rollbar = new Rollbar('d127b6e52cdd4ebcaea93d684c756d7e');
 
   const env = dotenv.config();
+  const log = getLogger('App');
 
   app.use(session(app));
   app.use(flash());
   app.use(async (ctx, next) => {
     try {
       rollbar.log('Starting application...');
+      log('Starting up...');
       ctx.state = {
         flash: ctx.flash,
         isSignedIn: () => ctx.session.userId !== undefined,
