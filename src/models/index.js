@@ -1,6 +1,6 @@
 var Sequelize = require('sequelize');
 var env = process.env.NODE_ENV || 'development';
-var config = require('__dirname' + 'config/config.js')[env];
+var config = require('__dirname' + '/../../config/config.js')[env];
 import getLogger from '../lib/log';
 
 const log = getLogger('ORM');
