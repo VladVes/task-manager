@@ -4,12 +4,10 @@ block content
   table.table.table-stripped
     thead
       tr
-        th Full Name
-        th Email
-        th Created At
+        th id
+        th text
     tbody
-      each user in users
+      each msg in hellow
         tr
-          td= user.fullName
-          td= user.email
-          td= user.createdAt
+          td= msg.id
+          td= msg.text
