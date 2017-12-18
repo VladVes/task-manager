@@ -1,5 +1,5 @@
 export default (sequelize, DataTypes) => {
-  const testModel = sequelize.default('testModel', {
+  const testModel = sequelize.define('testModel', {
     id: DataTypes.INTEGER,
     name: DataTypes.TEXT,
   });
