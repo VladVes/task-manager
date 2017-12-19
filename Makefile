@@ -5,7 +5,7 @@ migrate:
 	npm run sequelize db:migrate
 
 seeds:
-	mpm run sequelize db:seed:all
+	npm run sequelize db:seed:all
 
 start:
 	DEBUG="TaskManager:*" npm run nodemon -- --watch . --ext '.js' --exec  babel-node -- 'src/bin/taskManager.js'
