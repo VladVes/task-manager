@@ -16,6 +16,7 @@ export default (router) => {
   })
   .post('users', '/users', async (ctx) => {
       const form = ctx.request.body.form;
+      console.log('FORM: ', form);
       const user = User.build(form);
       try {
         await user.save();
