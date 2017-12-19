@@ -6,10 +6,10 @@ block content
       tr
         th Full Name
         th Email
-        th Created At
+        th Registered
     tbody
       each user in users
         tr
-          td= user.fullName
+          td= user.fullName()
           td= user.email
           td= user.createdAt

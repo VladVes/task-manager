@@ -1,7 +1,7 @@
 import { encrypt } from '../lib/secure';
 
 export default (sequelize, DataTypes) => {
-  var User = sequelize.define('User', {
+  const User = sequelize.define('User', {
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
     email: {
@@ -28,15 +28,14 @@ export default (sequelize, DataTypes) => {
         len: [1, +Infinity],
       },
     },
-  }, {
-    classMethods: {
-      fullName() {
-        return `${this.firstName} ${this.lastName}`;
-      },
-      associate: function(models) {
-        // associations can be defined here
-      },
-    },
   });
+  
+  User.associate = function (models) {
+
+  };
+  User.prototype.fullName = function () {
+    return `${this.firstName} ${this.lastName}`;
+  };
+
   return User;
 };
