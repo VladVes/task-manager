@@ -1,6 +1,6 @@
 import welcome from './welcome';
-import hellowfromdb from './hellowfromdb';
+import user from './user';
 
-const controllers = [welcome, hellowfromdb];
+const controllers = [welcome, user];
 
 export default (router) => controllers.forEach(f => f(router));
