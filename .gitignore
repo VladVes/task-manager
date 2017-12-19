@@ -2,5 +2,5 @@
 /dist/
 /__coverage/
 /vendor/
-db.development.sqlite
-.env
+./db.development.sqlite
+./.env
