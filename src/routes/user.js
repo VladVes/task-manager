@@ -7,5 +7,9 @@ export default (router) => {
     log(`GET ${ctx.request.href}`);
     const users = await User.findAll();
     ctx.render('users', { users });
+  })
+  .get('newUser', '/users/new', (ctx) => {
+      const user = User.build();
+      ctx.render('users/new', { f: buildFormObj(user) });
   });
 };
