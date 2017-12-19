@@ -13,6 +13,6 @@ if (config.use_env_var) {
   log(`connecting to DB by using config file`);
 }
 
-const testModel = sequelize.import('./testModel.js');
+const testModel = sequelize.import('./testmodel.js');
 
 export { testModel };
