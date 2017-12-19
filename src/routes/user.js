@@ -1,5 +1,7 @@
 import getLogger from '../lib/log';
+import buildFormObj from '../lib/formObjectBuilder';
 import { User } from '../models';
+
 
 const log = getLogger('HTTP:');
 export default (router) => {
