@@ -14,6 +14,7 @@ import serve from 'koa-static';
 import koaLogger from 'koa-logger';
 import Pug from 'koa-pug';
 import dotenv from 'dotenv';
+import KeyGrip from 'keygrip';
 
 import addRoutes from './routes';
 import getLogger from './lib/log';
@@ -21,11 +22,12 @@ import getWebpackConfig from '../webpack.config.babel';
 
 export default () => {
   const app = new Koa();
-  const rollbar = new Rollbar('d127b6e52cdd4ebcaea93d684c756d7e');
+    const rollbar = new Rollbar('d127b6e52cdd4ebcaea93d684c756d7e');
 
   const env = dotenv.config();
   const log = getLogger('App');
 
+  app.keys = new KeyGrip(['shtirlitz', 'has come', 'to sing cookies'], 'sha256');
   app.use(session(app));
   app.use(flash());
   app.use(async (ctx, next) => {
