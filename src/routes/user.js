@@ -14,13 +14,45 @@ export default (router) => {
       const user = User.build();
       ctx.render('users/new', { f: buildFormObj(user) });
   })
-  .get('profile', '/user/profile', (ctx) => {
-      const user = User.build();
-      ctx.render('users/profile', { f: buildFormObj(user) });
+  .get('profile', '/user/profile', async (ctx) => {
+      if (ctx.state.isSignedIn()) {
+        const id = ctx.session.userId;
+        const user = await(User.findById(id));
+        ctx.render('users/profile', { f: buildFormObj(user) });
+      } else {
+        ctx.flash.set('You should sing IN or sign UP first.');
+        ctx.redirect(router.url('root'));
+      }
+  })
+  .patch('profile', '/user/profile', async (ctx) => {
+      if (ctx.state.isSignedIn()) {
+        const data = ctx.request.body.form;
+        const user = await(User.findById(ctx.session.userId));
+        try {
+          await(user.update(data));
+          ctx.flash.set('Profile saved successfully.');
+          ctx.redirect(router.url('root'));
+        } catch (e) {
+            ctx.render('users/profile', { f: buildFormObj(user, e) });
+        }
+      } else {
+        ctx.flash.set('You should sing IN or sign UP first.');
+        ctx.redirect(router.url('root'));
+      }
   })
   .post('users', '/users', async (ctx) => {
       const form = ctx.request.body.form;
-      console.log('FORM: ', form);
+      const user = User.build(form);
+      try {
+        await user.save();
+        ctx.flash.set('User has been created');
+        ctx.redirect(router.url('root'));
+      } catch (e) {
+        ctx.render('users/new', { f: buildFormObj(user, e) });
+      }
+  })
+  .delet('users', '/users/delete', async (ctx) => {
+      const form = ctx.request.body.form;
       const user = User.build(form);
       try {
         await user.save();
