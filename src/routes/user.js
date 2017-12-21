@@ -51,7 +51,7 @@ export default (router) => {
         ctx.render('users/new', { f: buildFormObj(user, e) });
       }
   })
-  .delet('users', '/users/delete', async (ctx) => {
+  .delete('users', '/users/delete', async (ctx) => {
       const form = ctx.request.body.form;
       const user = User.build(form);
       try {
