@@ -7,3 +7,5 @@ block content
     +input(f, 'lastName')
     +input(f, 'password', { as: 'password' })
     +button(f)
+  +formFor(f, { url: urlFor('deleteUser'), method: 'delete' })
+    +button(f, 'submit', 'btn-danger', 'Delete profile')
