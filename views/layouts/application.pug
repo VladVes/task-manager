@@ -26,8 +26,9 @@ html(lang="en")
               a.nav-link(href=urlFor('newSession')) Sign In
             li.nav-item
               a.nav-link(href=urlFor('newUser')) Sign Up
-    .container
+    div(class='container w-50 mx-auto')
       - const msg = flash.get()
       if msg
         .alert.alert-info.m-3= msg
-block content
+div(class='container w-50 mx-auto')
+  block content

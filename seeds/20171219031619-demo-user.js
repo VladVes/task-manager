@@ -7,6 +7,12 @@ module.exports = {
         lastName: 'Doe',
         email: 'doe@mail.com',
         passwordDigest: '123dddeeefff'
+      },
+      {
+        firstName: 'Maria',
+        lastName: 'Zalman',
+        email: 'zalman@mail.com',
+        passwordDigest: '123dddeeefff'
       }], {});
   },
 
