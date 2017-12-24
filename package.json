@@ -17,7 +17,7 @@
       "!**/node_modules/**",
       "!**/dist/**"
     ],
-    "coverageDirectory": "./__coverage",
+    "coverageDirectory": "./coverage",
     "coveragePathIgnorePatterns": [
       "./dist/",
       "./migrations/",
@@ -27,7 +27,7 @@
       "./src/bin",
       "./public/assets",
       "webpack.config.babel.js",
-      "./__coverage"
+      "./coverage"
     ]
   },
   "scripts": {
