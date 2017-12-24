@@ -27,6 +27,7 @@
       "./src/bin",
       "./public/assets",
       "webpack.config.babel.js",
+      "gulpfile.babel.js",
       "./coverage"
     ]
   },
