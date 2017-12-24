@@ -14,7 +14,7 @@ describe('base requests', () => {
     server = app().listen();
   });
 
-  it('GET 200', async () => {
+  it('GET 200/302', async () => {
     const res0 = await request.agent(server).get('/');
     const res1 = await request.agent(server).get('/users');
     const res2 = await request.agent(server).get('/users/new');
@@ -23,7 +23,7 @@ describe('base requests', () => {
     expect(res0).toHaveHTTPStatus(200);
     expect(res1).toHaveHTTPStatus(200);
     expect(res2).toHaveHTTPStatus(200);
-    expect(res3).toHaveHTTPStatus(200);
+    expect(res3).toHaveHTTPStatus(302);
     expect(res4).toHaveHTTPStatus(200);
   });
 
