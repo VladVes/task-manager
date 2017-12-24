@@ -15,8 +15,16 @@ describe('base requests', () => {
   });
 
   it('GET 200', async () => {
-    const res = await request.agent(server).get('/');
-    expect(res).toHaveHTTPStatus(200);
+    const res0 = await request.agent(server).get('/');
+    const res1 = await request.agent(server).get('/users');
+    const res2 = await request.agent(server).get('/users/new');
+    const res3 = await request.agent(server).get('/user/profile');
+    const res4 = await request.agent(server).get('/session/new');
+    expect(res0).toHaveHTTPStatus(200);
+    expect(res1).toHaveHTTPStatus(200);
+    expect(res2).toHaveHTTPStatus(200);
+    expect(res3).toHaveHTTPStatus(200);
+    expect(res4).toHaveHTTPStatus(200);
   });
 
   it('GET 404', async () => {
