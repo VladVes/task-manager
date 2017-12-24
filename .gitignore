@@ -1,6 +1,6 @@
 /node_modules/
 /dist/
-/__coverage/
+/coverage/
 /vendor/
 /db.development.sqlite
 /.env
