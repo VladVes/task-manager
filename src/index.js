@@ -58,7 +58,7 @@ export default () => {
       config: getWebpackConfig(),
     }));
   } else {
-     log('starting nodemon...');
+    log('starting nodemon...');
   }
   log(`runnig in ${process.env.NODE_ENV} environment`);
   log(`listen on port == ${process.env.PORT}`);

@@ -30,10 +30,9 @@ export default (sequelize, DataTypes) => {
     },
   });
 
-  User.associate = function (models) {
-  };
+  User.associate = models => models;
 
-  User.prototype.fullName = function () {
+  User.prototype.fullName = function fullName() {
     return `${this.firstName} ${this.lastName}`;
   };
 
