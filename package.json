@@ -20,6 +20,9 @@
     "coverageDirectory": "./__coverage",
     "coveragePathIgnorePatterns": [
       "./dist/",
+      "./migrations/",
+      "./seeds/",
+      "./client/",
       "./node_modules/",
       "./src/bin",
       "./public/assets",

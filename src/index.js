@@ -22,9 +22,9 @@ import getWebpackConfig from '../webpack.config.babel';
 
 export default () => {
   const app = new Koa();
-    const rollbar = new Rollbar('d127b6e52cdd4ebcaea93d684c756d7e');
+  const rollbar = new Rollbar('d127b6e52cdd4ebcaea93d684c756d7e');
 
-  const env = dotenv.config();
+  dotenv.config();
   const log = getLogger('App');
 
   app.keys = new KeyGrip(['shtirlitz', 'has come', 'to sing cookies'], 'sha256');
@@ -47,14 +47,14 @@ export default () => {
   app.use(bodyParser());
   app.use(methodOverride((req) => {
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
-      return req.body._method;
+      return req.body._method; // eslint-disable-line
     }
     return null;
   }));
   app.use(serve(path.join(__dirname, '..', 'public')));
 
   if (process.env.NODE_ENV !== 'test' && process.env.NODE_ENV !== 'development') {
-      app.use(middleware({
+    app.use(middleware({
       config: getWebpackConfig(),
     }));
   } else {

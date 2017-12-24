@@ -1,3 +1,3 @@
 import debug from 'debug';
 
-export default subSys => debug('TaskManager: ' + subSys);
+export default subSys => debug(`TaskManager: ${subSys}`);
