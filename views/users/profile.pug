@@ -8,4 +8,7 @@ block content
     +input(f, 'password', { as: 'password' })
     +button(f)
   +formFor(f, { url: urlFor('deleteUser'), method: 'delete' })
-    input(class=`btn btn-danger` type=`submit` data-confirm="Are you sure?" value=`Delete profile`)
+    .pt-3
+      p Danger zone
+      div(class="w-50 h-50 p-3" style="border: solid; border-color: red")
+        input(class=`btn btn-danger` type=`submit` data-confirm="Are you sure?" value=`Delete profile`)
