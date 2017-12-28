@@ -17,6 +17,7 @@ export default (router) => {
       });
       if (user && user.passwordDigest === encrypt(password)) {
         ctx.session.userId = user.id;
+        ctx.flash.set(`You have successfully singed in as ${user.fullName()}`);
         ctx.redirect(router.url('root'));
         return;
       }
