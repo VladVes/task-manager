@@ -1,6 +1,10 @@
 extends /layouts/application.pug
 
 block content
+  container.w-50.mx-auto
+    - const msg = flash.get()
+    if msg
+      .alert.alert-info.m-3= msg
   +formFor(f, { url: urlFor('users'), method: 'post' })
     +input(f, 'email')
     +input(f, 'firstName')

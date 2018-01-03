@@ -21,10 +21,11 @@ export default (router) => {
         ctx.redirect(router.url('root'));
         return;
       }
-      ctx.flash.set('email or password were wrong');
-      ctx.render('sessions/new', { f: buildFormObj({ email }) });
+      ctx.flash.set('Email or Password were wrong');
+      //ctx.render('sessions/new', { f: buildFormObj({ email }) });
+      ctx.redirect(router.url('newSession'));
     })
-    .delete('session', '/session', (ctx) => {
+    .delete('delSession', '/session', (ctx) => {
       ctx.session = {};
       ctx.redirect(router.url('root'));
     });
