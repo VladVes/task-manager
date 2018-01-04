@@ -6,7 +6,7 @@ module.exports = {
       { name: 'new' },
       { name: 'in work' },
       { name: 'on testing' },
-      { name: 'finished' },
+      { name: 'finished' }
     ], {});
   },
 
