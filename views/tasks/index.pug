@@ -1,0 +1,21 @@
+extends /layouts/application.pug
+
+block content
+  table.table.table-stripped
+    thead
+      tr
+        th Task Name
+        th Description
+        th Creator
+        th Assignet to
+        th Status
+        th Tags
+    tbody
+      each task in tasks
+        tr
+          td= task.name
+          td= task.description
+          td= task.creator
+          td= utask.assignedTo
+          td= task.assignedTo
+          td= task.tags
