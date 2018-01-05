@@ -13,8 +13,9 @@ html(lang="en")
         span.navbar-toggler-icon
       .collapse.navbar-collapse
         ul.navbar-nav.mr-auto
-          li.nav-item.active
+          li.nav-item
             a.nav-link(href=urlFor('users')) Users
+          li.nav-item
             a.nav-link(href=urlFor('tasks')) Tasks
         ul.navbar-nav
           if isSignedIn()

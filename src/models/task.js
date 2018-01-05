@@ -9,8 +9,11 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Task.associate = (models) => {
-    models.Task.belongsToMany(models.Tag, {through: 'TaskTag', foreignKey: 'taskId'});
-    models.Tag.belongsToMany(models.Task, {through: 'TaskTag', foreignKey: 'tagId'});
+    console.log("FROM ASSOCIATE!");
+    models.Task.belongsToMany(models.Tag, {through: 'TaskTag'});
+    models.Tag.belongsToMany(models.Task, {through: 'TaskTag'});
+    console.log("MODELS: ", models);
+    console.log("MODEL Task: ", Task);
   };
 
   return Task;
