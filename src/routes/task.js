@@ -1,6 +1,6 @@
 import getLogger from '../lib/log';
 import buildFormObj from '../lib/formObjectBuilder';
-import { Task, Tag } from '../models';
+import { Task, Tag, User } from '../models';
 
 export default (router) => {
   router.get('tasks', '/tasks', async (ctx) => {
@@ -32,5 +32,11 @@ export default (router) => {
     });
 
     ctx.render('tasks', { tasks });
+  })
+  .get('newTask', '/tasks/new', async (ctx) => {
+    const task = Task.build();
+    const users = await User.findAll();
+    console.log("USERS: ", users);
+    ctx.render('tasks/new', { f: buildFormObj(task) });
   });
 };
