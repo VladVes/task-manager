@@ -11,18 +11,26 @@ export default (router) => {
       assignedTo: 2,
       status: 1
     });
+    const tags = await Tag.findAll();
+    newOneTask.addTag(tags);
     await newOneTask.save();
 
     const tasks = await Task.findAll({
       include: [{
         model: Tag,
         through: {
-
         }
       }],
     });
 
-    //const tasks = await Task.findAll();
+    for (let i = 0; i < tasks.length; i++) {
+      tasks[i].tags = await tasks[i].getTags();
+    }
+
+    tasks.forEach((task) => {
+      console.log("is tagsColl exists : ", task.tags);
+    });
+
     ctx.render('tasks', { tasks });
   });
 };

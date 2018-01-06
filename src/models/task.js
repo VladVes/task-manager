@@ -9,11 +9,9 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Task.associate = (models) => {
-    console.log("FROM ASSOCIATE!");
     models.Task.belongsToMany(models.Tag, {through: 'TaskTag'});
     models.Tag.belongsToMany(models.Task, {through: 'TaskTag'});
-    console.log("MODELS: ", models);
-    console.log("MODEL Task: ", Task);
+
   };
 
   return Task;

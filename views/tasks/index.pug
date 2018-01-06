@@ -18,4 +18,6 @@ block content
           td= task.creator
           td= task.assignedTo
           td= task.status
-          td= task.tags
+          td
+            each tag in task.tags
+              = tag.name
