@@ -10,7 +10,7 @@ block content
         th Task Name
         th Description
         th Creator
-        th Assignet to
+        th Assigned to
         th Status
         th Tags
     tbody
@@ -18,9 +18,13 @@ block content
         tr
           td= task.name
           td= task.description
-          td= task.creator
-          td= task.assignedTo
+          td= task.creator.fullName()
+          if task.assignedTo
+            td= task.assignedTo.fullName()
+          else
+            td= ' '
           td= task.status
           td
             each tag in task.tags
-              = tag.name
+              a.badge.badge-dark(href="#")= tag.name
+              =' '
