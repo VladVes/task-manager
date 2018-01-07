@@ -27,16 +27,15 @@ export default (router) => {
       tasks[i].tags = await tasks[i].getTags();
     }
 
-    tasks.forEach((task) => {
-      console.log("is tagsColl exists : ", task.tags);
-    });
-
     ctx.render('tasks', { tasks });
   })
   .get('newTask', '/tasks/new', async (ctx) => {
     const task = Task.build();
     const users = await User.findAll();
     console.log("USERS: ", users);
-    ctx.render('tasks/new', { f: buildFormObj(task) });
+    ctx.render('tasks/new', { f: buildFormObj(task), users });
+  })
+  .post('task', '/tasks', async (ctx) => {
+
   });
 };
