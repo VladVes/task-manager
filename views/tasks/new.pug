@@ -4,6 +4,11 @@ block content
   +formFor(f, { url: urlFor('tasks'), method: 'post' })
     +input(f, 'assign to')
     .form-group
+      label(for="assignTo") Assign to:
+      select.form-control(name="form[assignTo]", id="assignTo")
+        each user in users
+          option= user.fullName()
+    .form-group
       label(for="description") Description
       textarea.form-control(name="form[description]", rows="8", id="description")
     +input(f, 'tags')
