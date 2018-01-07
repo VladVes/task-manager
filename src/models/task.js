@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-      type: Sequelize.INTEGER
+      type: DataTypes.INTEGER
     },
     name: {
       type: DataTypes.STRING,
@@ -33,6 +33,9 @@ module.exports = (sequelize, DataTypes) => {
   Task.associate = (models) => {
     models.Task.belongsToMany(models.Tag, {through: 'TaskTag'});
     models.Tag.belongsToMany(models.Task, {through: 'TaskTag'});
+
+    models.Task.belongsTo(models.User, {foreignKey: 'assignedTo'})
+    models.Creator = models.Task.belongsTo(models.User, {as: 'Creator', foreignKey: 'creator'})
   };
 
   return Task;
