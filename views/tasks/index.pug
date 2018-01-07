@@ -1,8 +1,9 @@
 extends /layouts/application.pug
 
 block content
-  .container.mb-4.pl-0
-    a.btn.btn-primary(href=urlFor('newTask')) New task
+  if isSignedIn()
+    .container.mb-4.pl-0
+      a.btn.btn-primary(href=urlFor('newTask')) New task
   table.table.table-stripped
     thead
       tr

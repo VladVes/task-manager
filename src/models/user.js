@@ -2,6 +2,12 @@ import { encrypt } from '../lib/secure';
 
 export default (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: Sequelize.INTEGER
+    },
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
     email: {

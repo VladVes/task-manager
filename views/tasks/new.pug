@@ -2,12 +2,12 @@ extends /layouts/application.pug
 
 block content
   +formFor(f, { url: urlFor('tasks'), method: 'post' })
-    +input(f, 'assign to')
+    +input(f, 'name')
     .form-group
-      label(for="assignTo") Assign to:
-      select.form-control(name="form[assignTo]", id="assignTo")
+      label(for="assignedTo") Assign to:
+      select.form-control(name="form[assignedTo]", id="assignedTo")
         each user in users
-          option= user.fullName()
+          option(value= user.id)= user.fullName()
     .form-group
       label(for="description") Description
       textarea.form-control(name="form[description]", rows="8", id="description")

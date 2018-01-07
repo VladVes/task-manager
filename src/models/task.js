@@ -1,6 +1,12 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Task = sequelize.define('Task', {
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: Sequelize.INTEGER
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -12,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     status: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      defaultValue: 1,
     },
     creator: {
       type: DataTypes.INTEGER,

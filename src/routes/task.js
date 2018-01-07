@@ -4,24 +4,12 @@ import { Task, Tag, User } from '../models';
 
 export default (router) => {
   router.get('tasks', '/tasks', async (ctx) => {
-    const newOneTask = Task.build({
-      name: 'slug',
-      description: 'created on flight',
-      creator: 1,
-      assignedTo: 2,
-      status: 1
-    });
-    const tags = await Tag.findAll();
-    newOneTask.addTag(tags);
-    await newOneTask.save();
 
     const tasks = await Task.findAll({
-      include: [{
-        model: Tag,
-        through: {
-        }
-      }],
+      include: [Tag],
     });
+    const tags = await Tag.findAll();
+    console.log("ALL TAGS: ", tags);
 
     for (let i = 0; i < tasks.length; i++) {
       tasks[i].tags = await tasks[i].getTags();
@@ -30,12 +18,32 @@ export default (router) => {
     ctx.render('tasks', { tasks });
   })
   .get('newTask', '/tasks/new', async (ctx) => {
-    const task = Task.build();
-    const users = await User.findAll();
-    console.log("USERS: ", users);
-    ctx.render('tasks/new', { f: buildFormObj(task), users });
+    if (ctx.state.isSignedIn()) {
+      const task = Task.build();
+      const users = await User.findAll();
+      ctx.render('tasks/new', { f: buildFormObj(task), users });
+    } else {
+      ctx.flash.set('You should sing IN or sign UP first.');
+      ctx.redirect(router.url('root'));
+    }
   })
-  .post('task', '/tasks', async (ctx) => {
+  .post('saveTask', '/tasks', async (ctx) => {
+    if (ctx.state.isSignedIn()) {
+      const data = ctx.request.body.form;
+      data.tags = data.tags.split(',').map(tag => ({ name: tag }));
+      data.creator = ctx.session.userId;
+      console.log("DATA FROM new task FORM : ", data);
 
+      //const newTask = Task.build(data, { include: [Tag] });
+      Task.create(data, { include: [Tag] });
+      //console.log("RESULT NEW TASK: ", newTask);
+      //await newTask.save();
+
+
+      ctx.redirect(router.url('root'));
+    } else {
+      ctx.flash.set('You should sing IN or sign UP first.');
+      ctx.redirect(router.url('root'));
+    }
   });
 };

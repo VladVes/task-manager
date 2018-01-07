@@ -7,7 +7,7 @@ module.exports = {
       description: 'test task',
       status: 1,
       creator: 3,
-      assignedTo: 5
+      assignedTo: 5,
     }], {});
   },
 
