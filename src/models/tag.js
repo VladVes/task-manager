@@ -5,13 +5,13 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-      type: Sequelize.INTEGER
+      type: DataTypes.INTEGER
     },
     name: {
       type: DataTypes.STRING,
       unique: true,
+      allowNull: false,
       validate: {
-        notNull: true,
         notEmpty: true
       },
     },
