@@ -39,5 +39,29 @@ export default (router) => {
       ctx.flash.set('You should sing IN or sign UP first.');
       ctx.redirect(router.url('root'));
     }
+  })
+  .get('task', '/task/:taskId', async (ctx) => {
+    const { taskId: id } = ctx.params;
+    const task = await Task.findById(id, {
+      include: [Tag, User, Creator, TaskStatus],
+    });
+    const users = await User.findAll();
+    ctx.render('tasks/edit', { f: buildFormObj(task), users });
+  })
+  .patch('editTask', '/tasks/edit', async (ctx) => {
+    if (ctx.state.isSignedIn()) {
+      const data = ctx.request.body.form;
+      const user = await User.findById(ctx.session.userId);
+      try {
+        await user.update(data);
+        ctx.flash.set('Profile saved successfully.');
+        ctx.redirect(router.url('root'));
+      } catch (e) {
+        ctx.render('users/profile', { f: buildFormObj(user, e) });
+      }
+    } else {
+      ctx.flash.set('You should sing IN or sign UP first.');
+      ctx.redirect(router.url('root'));
+    }
   });
 };
