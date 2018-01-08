@@ -1,0 +1,16 @@
+extends /layouts/application.pug
+
+block content
+  .container.w-60.mx-auto
+    +formFor(f, { url: urlFor('editTask'), method: 'post' })
+      +input(f, 'name')
+      .form-group
+        label(for="assignedTo") Assign to:
+        select.form-control(name="form[assignedTo]", id="assignedTo")
+          each user in users
+            option(value= user.id)= user.fullName()
+      .form-group
+        label(for="description") Description
+        textarea.form-control(name="form[description]", rows="8", id="description")
+      +input(f, 'Tag')
+      +button(f)
