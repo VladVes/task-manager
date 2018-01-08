@@ -34,7 +34,6 @@ export default (router) => {
         const users = await User.findAll();
         ctx.render('tasks/new', { f: buildFormObj(newTask, e), users });
       }
-
     } else {
       ctx.flash.set('You should sing IN or sign UP first.');
       ctx.redirect(router.url('root'));
@@ -45,10 +44,39 @@ export default (router) => {
     const task = await Task.findById(id, {
       include: [Tag, User, Creator, TaskStatus],
     });
+    task.tags = task.Tags.map(tag => tag.name).join(', ');
     const users = await User.findAll();
-    ctx.render('tasks/edit', { f: buildFormObj(task), users });
+    const statuses = await TaskStatus.findAll();
+    ctx.render('tasks/edit', { f: buildFormObj(task), users, statuses });
   })
-  .patch('editTask', '/tasks/edit', async (ctx) => {
+  .patch('editTask', '/tasks/edit/:taskId', async (ctx) => {
+    if (ctx.state.isSignedIn()) {
+      const { taskId: id } = ctx.params;
+      const data = ctx.request.body.form;
+      data.Tags = data.tags.split(',').map(tag => ({ name: tag }));
+      data.creator = ctx.session.userId;
+      const task = await Task.findById(id, {
+        include: [Tag, User, Creator, TaskStatus],
+      });
+    try {
+        await task.update(data);
+
+        const uptags = await Tag.findAll();
+        console.log("TAGS AFTER SAVING: ", uptags);
+        console.log("TASK AFTER SAVING: ", task);
+        ctx.flash.set('Task updated successfully.');
+        ctx.redirect(router.url('tasks'));
+      } catch (e) {
+        const users = await User.findAll();
+        const statuses = await TaskStatus.findAll();
+        ctx.render('tasks/edit', { f: buildFormObj(task, e), users, statuses });
+      }
+    } else {
+      ctx.flash.set('You should sing IN or sign UP first.');
+      ctx.redirect(router.url('root'));
+    }
+  })
+  .delete('deleteTask', '/tasks/delet', async (ctx) => {
     if (ctx.state.isSignedIn()) {
       const data = ctx.request.body.form;
       const user = await User.findById(ctx.session.userId);
