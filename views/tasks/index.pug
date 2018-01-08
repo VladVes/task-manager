@@ -4,7 +4,7 @@ block content
   if isSignedIn()
     .container.mb-4.pl-0
       a.btn.btn-primary(href=urlFor('newTask')) New task
-  table.table.table-stripped
+  table.table.table-stripped.bg-light
     thead
       tr
         th Task Name
@@ -15,7 +15,7 @@ block content
     tbody
       each task in tasks
         tr
-          td.bg-light
+          td
             a(href=urlFor('task', task.id))= task.name
           td= task.Creator.fullName()
           if task.User
