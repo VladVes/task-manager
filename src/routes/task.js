@@ -76,7 +76,7 @@ export default (router) => {
       ctx.redirect(router.url('root'));
     }
   })
-  .delete('deleteTask', '/tasks/delet', async (ctx) => {
+  .delete('deleteTask', '/tasks/delete/:taskId', async (ctx) => {
     if (ctx.state.isSignedIn()) {
       const data = ctx.request.body.form;
       const user = await User.findById(ctx.session.userId);

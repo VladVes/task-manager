@@ -26,7 +26,7 @@ block content
       .form-group
         input.btn.btn-success.mr-4(type="submit", value="Save")
         a.btn.btn-secondary.mr-4(href=urlFor('tasks')) Close
-    +formFor(f, { url: urlFor('deleteTask'), method: 'delete' })
+    +formFor(f, { url: urlFor('deleteTask', f.object.id), method: 'delete' })
       .pt-3
         p Danger zone
         .w-50.h-50.p-3(style="border: solid; border-color: red")
