@@ -8,7 +8,6 @@ block content
     thead
       tr
         th Task Name
-        th Description
         th Creator
         th Assigned to
         th Status
@@ -16,14 +15,14 @@ block content
     tbody
       each task in tasks
         tr
-          td= task.name
-          td= task.description
+          td.bg-light
+            a(href=urlFor('task', task.id))= task.name
           td= task.Creator.fullName()
           if task.User
             td= task.User.fullName()
           else
             td= ' '
-          td= task.status.name
+          td= task.TaskStatus.name
           td
             each tag in task.Tags
               a.badge.badge-dark(href="#")= tag.name
