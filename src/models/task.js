@@ -33,9 +33,9 @@ module.exports = (sequelize, DataTypes) => {
   Task.associate = (models) => {
     models.Task.belongsToMany(models.Tag, {through: 'TaskTag'});
     models.Tag.belongsToMany(models.Task, {through: 'TaskTag'});
-
-    models.Task.belongsTo(models.User, {foreignKey: 'assignedTo'})
-    models.Creator = models.Task.belongsTo(models.User, {as: 'Creator', foreignKey: 'creator'})
+    models.Task.belongsTo(models.User, {foreignKey: 'assignedTo'});
+    models.Creator = models.Task.belongsTo(models.User, {as: 'Creator', foreignKey: 'creator'});
+    models.Task.belongsTo(models.TaskStatus, {foreignKey: 'status'});
   };
 
   return Task;

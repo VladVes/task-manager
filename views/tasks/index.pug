@@ -18,13 +18,13 @@ block content
         tr
           td= task.name
           td= task.description
-          td= task.creator.fullName()
-          if task.assignedTo
-            td= task.assignedTo.fullName()
+          td= task.Creator.fullName()
+          if task.User
+            td= task.User.fullName()
           else
             td= ' '
-          td= task.status
+          td= task.status.name
           td
-            each tag in task.tags
+            each tag in task.Tags
               a.badge.badge-dark(href="#")= tag.name
               =' '

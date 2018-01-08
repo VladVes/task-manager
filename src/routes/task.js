@@ -1,21 +1,12 @@
 import getLogger from '../lib/log';
 import buildFormObj from '../lib/formObjectBuilder';
-import { Task, Tag, User, Creator } from '../models';
+import { Task, Tag, User, Creator, TaskStatus } from '../models';
 
 export default (router) => {
   router.get('tasks', '/tasks', async (ctx) => {
-
     const tasks = await Task.findAll({
-      include: [Tag, User, Creator],
+      include: [Tag, User, Creator, TaskStatus],
     });
-    //console.log("firs Task: ", tasks[tasks.length-1]);
-
-    for (let i = 0; i < tasks.length; i++) {
-      tasks[i].tags = await tasks[i].getTags();
-      tasks[i].assignedTo = await tasks[i].getUser();
-      tasks[i].creator = await tasks[i].getCreator();
-    }
-
     ctx.render('tasks', { tasks });
   })
   .get('newTask', '/tasks/new', async (ctx) => {
