@@ -2,15 +2,32 @@ extends /layouts/application.pug
 
 block content
   .container.w-60.mx-auto
-    +formFor(f, { url: urlFor('editTask'), method: 'post' })
+    +formFor(f, { url: urlFor('editTask', f.object.id), method: 'patch' })
       +input(f, 'name')
       .form-group
         label(for="assignedTo") Assign to:
         select.form-control(name="form[assignedTo]", id="assignedTo")
+          option(selected value= f.object.User.id)= f.object.User.fullName()
           each user in users
-            option(value= user.id)= user.fullName()
+            if user.id !== f.object.User.id
+              option(value= user.id)= user.fullName()
       .form-group
         label(for="description") Description
         textarea.form-control(name="form[description]", rows="8", id="description")
-      +input(f, 'Tag')
-      +button(f)
+          = f.object.description
+      .form-group
+        label(for="status") Status
+        select.form-control(name="form[status]", id="status")
+          option(selected value= f.object.TaskStatus.id)= f.object.TaskStatus.name
+          each status in statuses
+            if status.id !== f.object.TaskStatus.id
+              option(value= status.id)= status.name
+      +input(f, 'tags')
+      .form-group
+        input.btn.btn-success.mr-4(type="submit", value="Save")
+        a.btn.btn-secondary.mr-4(href=urlFor('tasks')) Close
+    +formFor(f, { url: urlFor('deleteTask'), method: 'delete' })
+      .pt-3
+        p Danger zone
+        .w-50.h-50.p-3(style="border: solid; border-color: red")
+          input(class=`btn btn-danger` type=`submit` data-confirm="Are you sure?" value=`Delete task`)
