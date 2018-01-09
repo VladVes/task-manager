@@ -1,0 +1,5 @@
+mixin correctUserName(user)
+  if user.isSoftDeleted()
+    .text-secondary= `${user.fullName()} (User profile was deleted)`
+  else
+    = `${user.fullName()}`
