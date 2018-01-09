@@ -22,7 +22,6 @@ block content
           each status in statuses
             if status.id !== f.object.TaskStatus.id
               option(value= status.id)= status.name
-      +input(f, 'tags')
       .form-group
         input.btn.btn-success.mr-4(type="submit", value="Save")
         a.btn.btn-secondary.mr-4(href=urlFor('tasks')) Close
