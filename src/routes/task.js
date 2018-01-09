@@ -53,17 +53,13 @@ export default (router) => {
     if (ctx.state.isSignedIn()) {
       const { taskId: id } = ctx.params;
       const data = ctx.request.body.form;
-      data.Tags = data.tags.split(',').map(tag => ({ name: tag }));
+      //data.Tags = data.tags.split(',').map(tag => ({ name: tag }));
       data.creator = ctx.session.userId;
       const task = await Task.findById(id, {
         include: [Tag, User, Creator, TaskStatus],
       });
     try {
         await task.update(data);
-
-        const uptags = await Tag.findAll();
-        console.log("TAGS AFTER SAVING: ", uptags);
-        console.log("TASK AFTER SAVING: ", task);
         ctx.flash.set('Task updated successfully.');
         ctx.redirect(router.url('tasks'));
       } catch (e) {
