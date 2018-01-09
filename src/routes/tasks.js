@@ -5,7 +5,12 @@ import { Task, Tag, User, Creator, TaskStatus } from '../models';
 export default (router) => {
   router.get('tasks', '/tasks', async (ctx) => {
     const tasks = await Task.findAll({
-      include: [{model: User, paranoid: false}, Creator, TaskStatus, Tag],
+      include: [
+        {model: User, paranoid: false},
+        {association: Creator, paranoid: false},
+        TaskStatus,
+        Tag,
+      ],
     });
     ctx.render('tasks', { tasks });
   })
