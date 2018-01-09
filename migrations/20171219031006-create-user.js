@@ -27,7 +27,10 @@ module.exports = {
       updatedAt: {
         type: Sequelize.DATE,
         defaultValue: Date.now()
-      }
+      },
+        deletedAt: {
+        type: Sequelize.DATE,
+      },
     });
   },
 down: (queryInterface, Sequelize) => {
