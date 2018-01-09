@@ -7,9 +7,10 @@ block content
       .form-group
         label(for="assignedTo") Assign to:
         select.form-control(name="form[assignedTo]", id="assignedTo")
-          option(selected value= f.object.User.id)= f.object.User.fullName()
+          if !f.object.User.isSoftDeleted()
+            option(selected value= f.object.User.id)= f.object.User.fullName()
           each user in users
-            if user.id !== f.object.User.id
+            if user.id !== f.object.User.id && !user.isSoftDeleted()
               option(value= user.id)= user.fullName()
       .form-group
         label(for="description") Description

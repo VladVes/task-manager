@@ -1,6 +1,7 @@
 extends /layouts/application.pug
 
 block content
+  - const isDeleted = entity => entity.isSoftDeleted();
   if isSignedIn()
     .container.mb-4.pl-0
       a.btn.btn-primary(href=urlFor('newTask')) New task
@@ -18,7 +19,8 @@ block content
           td
             a(href=urlFor('task', task.id))= task.name
           td= task.Creator.fullName()
-          td= task.User.fullName()
+          td
+            +correctUserName(task.User)
           td= task.TaskStatus.name
           td
             each tag in task.Tags
