@@ -58,7 +58,6 @@ export default (router) => {
     if (ctx.state.isSignedIn()) {
       const { taskId: id } = ctx.params;
       const data = ctx.request.body.form;
-      //data.Tags = data.tags.split(',').map(tag => ({ name: tag }));
       data.creator = ctx.session.userId;
       const task = await Task.findById(id, {
         include: [Tag, User, Creator, TaskStatus],
@@ -79,15 +78,11 @@ export default (router) => {
   })
   .delete('deleteTask', '/tasks/delete/:taskId', async (ctx) => {
     if (ctx.state.isSignedIn()) {
-      const data = ctx.request.body.form;
-      const user = await User.findById(ctx.session.userId);
-      try {
-        await user.update(data);
-        ctx.flash.set('Profile saved successfully.');
-        ctx.redirect(router.url('root'));
-      } catch (e) {
-        ctx.render('users/profile', { f: buildFormObj(user, e) });
-      }
+      const { taskId: id } = ctx.params;
+      const task = await Task.findById(id);
+      task.destroy();
+      ctx.flash.set('Task was deleted');
+      ctx.redirect(router.url('tasks'));
     } else {
       ctx.flash.set('You should sing IN or sign UP first.');
       ctx.redirect(router.url('root'));

@@ -53,9 +53,8 @@ export default (router) => {
       if (ctx.state.isSignedIn()) {
         const user = await User.findById(ctx.session.userId);
         user.destroy();
-        console.log("AFTER DESTROY: ", user);
         ctx.session = {};
-        ctx.flash.set('Accaunt has been deleted');
+        ctx.flash.set('User profile was deleted');
         ctx.redirect(router.url('root'));
       } else {
         ctx.flash.set('You should sing IN or sign UP first.');
