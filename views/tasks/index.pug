@@ -18,10 +18,7 @@ block content
           td
             a(href=urlFor('task', task.id))= task.name
           td= task.Creator.fullName()
-          if task.User
-            td= task.User.fullName()
-          else
-            td= ' '
+          td= task.User.fullName()
           td= task.TaskStatus.name
           td
             each tag in task.Tags

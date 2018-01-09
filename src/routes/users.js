@@ -53,6 +53,7 @@ export default (router) => {
       if (ctx.state.isSignedIn()) {
         const user = await User.findById(ctx.session.userId);
         user.destroy();
+        console.log("AFTER DESTROY: ", user);
         ctx.session = {};
         ctx.flash.set('Accaunt has been deleted');
         ctx.redirect(router.url('root'));

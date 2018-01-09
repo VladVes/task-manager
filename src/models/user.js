@@ -34,6 +34,8 @@ export default (sequelize, DataTypes) => {
         len: [1, +Infinity],
       },
     },
+  }, {
+    paranoid: true,
   });
 
   User.associate = models => models;
