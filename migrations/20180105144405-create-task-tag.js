@@ -5,10 +5,10 @@ module.exports = {
       status: {
         type: Sequelize.STRING
       },
-      taskId: {
+      TaskId: {
         type: Sequelize.INTEGER
       },
-      tagId: {
+      TagId: {
         type: Sequelize.INTEGER
       },
       createdAt: {
