@@ -4,28 +4,6 @@ import { Task, Tag, User, Creator, TaskStatus } from '../models';
 
 export default (router) => {
   router.get('tasks', '/tasks', async (ctx) => {
-    /*
-    const tasks = await Task.findAll({
-      include: [
-        {
-          model: User,
-          paranoid: false,
-        },
-        {
-          model: Creator,
-          paranoid: false,
-        },
-        {
-          model: TaskStatus,
-          paranoid: false,
-        },
-        {
-          model: Tag,
-          paranoid: false,
-        },
-      ],
-    });
-    */
     const tasks = await Task.findAll({
       include: [{model: User, paranoid: false}, Creator, TaskStatus, Tag],
     });
@@ -64,11 +42,11 @@ export default (router) => {
   .get('task', '/task/:taskId', async (ctx) => {
     const { taskId: id } = ctx.params;
     const task = await Task.findById(id, {
-      include: [Tag, User, Creator, TaskStatus],
+      include: [{model: User, paranoid: false}, Creator, TaskStatus, Tag],
     });
     task.tags = task.Tags.map(tag => tag.name).join(', ');
-    const users = await User.findAll();
-    const statuses = await TaskStatus.findAll();
+    const users = await User.findAll({ paranoid: false });
+    const statuses = await TaskStatus.findAll({ paranoid: false });
     ctx.render('tasks/edit', { f: buildFormObj(task), users, statuses });
   })
   .patch('editTask', '/tasks/edit/:taskId', async (ctx) => {
