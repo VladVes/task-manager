@@ -1,8 +1,8 @@
 import welcome from './welcome';
 import sessions from './sessions';
-import user from './user';
-import task from './task';
+import users from './users';
+import tasks from './tasks';
 
-const controllers = [welcome, user, sessions, task];
+const controllers = [welcome, users, sessions, tasks];
 
 export default router => controllers.forEach(f => f(router));
