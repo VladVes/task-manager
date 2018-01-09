@@ -18,7 +18,8 @@ block content
         tr
           td
             a(href=urlFor('task', task.id))= task.name
-          td= task.Creator.fullName()
+          td
+            +correctUserName(task.Creator)
           td
             +correctUserName(task.User)
           td= task.TaskStatus.name
