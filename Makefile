@@ -1,6 +1,9 @@
 install:
 	npm install
 
+db:
+	./dbmigrate
+
 migrate:
 	npm run sequelize db:migrate
 
