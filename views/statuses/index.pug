@@ -9,10 +9,13 @@ block content
       tr
         th Status Id
         th Status name
+        th Actions
     tbody
       each status in statuses
         tr
           if !status.isSoftDeleted()
             td= status.id
             td= status.name
-              = a.badge.badge-danger.ml-2(href=urlFor('deleteStatus', status.id), data-confirm="Are you sure?")= 'Delete status'
+            td
+              a.badge.badge-primary.mr-2(href=urlFor('editStatus', status.id)= 'Rename'
+              a.badge.badge-danger.mr-2(href=urlFor('deleteStatus', status.id, data-confirm="Are you sure?")= 'Delete'
