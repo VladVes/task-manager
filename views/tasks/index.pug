@@ -4,8 +4,9 @@ block content
   - const isDeleted = entity => entity.isSoftDeleted();
   if isSignedIn()
     .container.mb-4.pl-0
-      a.btn.btn-primary.mr-2(href=urlFor('newTask')) New task
-      a.btn.btn-primary.mr-2(href=urlFor('statuses')) Statuses
+      a.btn.btn-success.mr-2(href=urlFor('newTask')) New task
+      a.btn.btn-primary.mr-2(href=urlFor('')) My tasks
+      a.btn.btn-info.mr-2(href=urlFor('statuses')) Statuses
   table.table.table-stripped.bg-light
     thead
       tr
