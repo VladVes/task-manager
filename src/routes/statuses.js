@@ -5,7 +5,7 @@ import { TaskStatus } from '../models';
 export default (router) => {
   router.get('statuses', '/statuses', async (ctx) => {
     const statuses = await TaskStatus.findAll();
-    ctx.render('statuses', { statuses });
+    ctx.render('statuses', { statuses: statuses.slice(1) });
   })
   .get('status', '/status/:statusId', async (ctx) => {
     const { statusId: id } = ctx.params;

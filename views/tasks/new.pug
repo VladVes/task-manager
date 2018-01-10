@@ -20,6 +20,9 @@ block content
           else
             - const fStatuses = statuses.slice(1)
             each status in fStatuses
-              option(value= status.id)= status.name
+              if status.name == 'new'
+                option(selected value= status.id)= status.name
+              else
+                option(value= status.id)= status.name
       +input(f, 'tags')
       +button(f)

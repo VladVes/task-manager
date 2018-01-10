@@ -8,12 +8,13 @@ block content
     table.table.table-stripped.bg-light
       thead
         tr
-          th Status Id
+          th Status №
           th Status name
       tbody
+        - let i = 1
         each status in statuses
           tr
             if !status.isSoftDeleted()
-              td= status.id
+              td= i++
               td
                 a.badge.badge-primary.ml-2(href=urlFor('status', status.id))= status.name
