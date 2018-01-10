@@ -28,5 +28,5 @@ block content
             +correctStatusName(task.TaskStatus)
           td
             each tag in task.Tags
-              a.badge.badge-dark(href=urlFor('filterByTagId', tag.id))= tag.name
+              a.badge.badge-dark(href=urlFor('findByTag', tag.id))= tag.name
               =' '
