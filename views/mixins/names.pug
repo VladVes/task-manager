@@ -3,3 +3,9 @@ mixin correctUserName(user)
     .text-secondary= `${user.fullName()} (User profile was deleted)`
   else
     = `${user.fullName()}`
+
+mixin correctStatusName(status)
+  if status.isSoftDeleted()
+    .text-secondary= `${status.name} (Status deprecated)`
+  else
+    = `${status.name}`
