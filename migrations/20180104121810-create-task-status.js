@@ -11,7 +11,7 @@ module.exports = {
       name: {
         allowNull: false,
         type: Sequelize.STRING,
-        defaultValue: 'new'
+        defaultValue: 'status unknown'
       },
       createdAt: {
         type: Sequelize.DATE,
