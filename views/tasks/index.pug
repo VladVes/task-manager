@@ -24,7 +24,8 @@ block content
             +correctUserName(task.Creator)
           td
             +correctUserName(task.User)
-          td= task.TaskStatus.name
+          td
+            +correctStatusName(task.TaskStatus)
           td
             each tag in task.Tags
               a.badge.badge-dark(href="#")= tag.name
