@@ -12,5 +12,14 @@ block content
       .form-group
         label(for="description") Description
         textarea.form-control(name="form[description]", rows="8", id="description")
+      .form-group
+        label(for="status") Status
+        select.form-control(name="form[status]", id="status")
+          if statuses.length == 1
+            option(selected value= statuses[0].id)= statuses[0].name
+          else
+            - const fStatuses = statuses.slice(1)
+            each status in fStatuses
+              option(value= status.id)= status.name
       +input(f, 'tags')
       +button(f)
