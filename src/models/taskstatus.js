@@ -14,6 +14,8 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: true,
       },
     },
+  }, {
+    paranoid: true,
   });
 
   TaskStatus.associate = models => models;
