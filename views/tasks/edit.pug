@@ -18,13 +18,17 @@ block content
           = f.object.description
       .form-group
         label(for="status") Status
+        = statuses.length
         select.form-control(name="form[status]", id="status")
-          if !f.object.TaskStatus.isSoftDeleted()
+          if !f.object.TaskStatus.isSoftDeleted() && f.object.TaskStatus.id !== 1
             option(selected value= f.object.TaskStatus.id)= f.object.TaskStatus.name
-          - const statTail = statuses.slice(1)
-          each status in statTail
-            if status.id !== f.object.TaskStatus.id && !status.isSoftDeleted()
-              option(value= status.id)= status.name
+          if statuses.length == 1
+            option(value= statuses[0].id)= statuses[0].name
+          else
+            - const statTail = statuses.slice(1)
+            each status in statTail
+              if status.id !== f.object.TaskStatus.id && !status.isSoftDeleted()
+                option(value= status.id)= status.name
       .form-group
         input.btn.btn-success.mr-4(type="submit", value="Save")
         a.btn.btn-secondary.mr-4(href=urlFor('tasks')) Close

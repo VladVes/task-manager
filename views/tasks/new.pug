@@ -24,5 +24,5 @@ block content
                 option(selected value= status.id)= status.name
               else
                 option(value= status.id)= status.name
-      +input(f, 'tags')
+      +input(f, 'tags', { as: 'text' }, '(Use a comma as the delimiter. For example: best, big, bang)')
       +button(f)
