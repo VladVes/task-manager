@@ -12,7 +12,7 @@ export default (router) => {
     const status = await TaskStatus.findById(id);
     ctx.render('statuses/edit', { f: buildFormObj(status) });
   })
-  .get('newStatus', '/staus/new', async (ctx) => {
+  .get('newStatus', '/statuses/new', async (ctx) => {
     if (ctx.state.isSignedIn()) {
       const status = TaskStatus.build();
       ctx.render('statuses/new', { f: buildFormObj(status) });
@@ -24,9 +24,10 @@ export default (router) => {
   .post('saveStatus', '/statuses', async (ctx) => {
     if (ctx.state.isSignedIn()) {
       const data = ctx.request.body.form;
-      const newStatus = TaskStatus.build(data, { include: [Tag] });
+      const newStatus = TaskStatus.build(data);
       try {
-        await TaskStatus.save();
+        await newStatus.save();
+        console.log("AFTER SAVING THE STATUS");
         ctx.flash.set('New status has been created successfully');
         ctx.redirect(router.url('statuses'));
       } catch (e) {

@@ -63,9 +63,7 @@ export default (router) => {
     if (ctx.state.isSignedIn()) {
       const { taskId: id } = ctx.params;
       const data = ctx.request.body.form;
-      const task = await Task.findById(id, {
-        include: [Tag, User, Creator, TaskStatus],
-      });
+      const task = await Task.findById(id);
     try {
         await task.update(data);
         ctx.flash.set('Task updated successfully.');
