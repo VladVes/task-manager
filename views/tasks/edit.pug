@@ -19,9 +19,10 @@ block content
       .form-group
         label(for="status") Status
         select.form-control(name="form[status]", id="status")
-          option(selected value= f.object.TaskStatus.id)= f.object.TaskStatus.name
+          if !f.object.TaskStatus.isSoftDeleted()
+            option(selected value= f.object.TaskStatus.id)= f.object.TaskStatus.name
           each status in statuses
-            if status.id !== f.object.TaskStatus.id
+            if status.id !== f.object.TaskStatus.id && !status.isSoftDeleted()
               option(value= status.id)= status.name
       .form-group
         input.btn.btn-success.mr-4(type="submit", value="Save")
