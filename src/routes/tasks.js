@@ -58,7 +58,6 @@ export default (router) => {
     if (ctx.state.isSignedIn()) {
       const { taskId: id } = ctx.params;
       const data = ctx.request.body.form;
-      data.creator = ctx.session.userId;
       const task = await Task.findById(id, {
         include: [Tag, User, Creator, TaskStatus],
       });
