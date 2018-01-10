@@ -3,7 +3,7 @@ extends /layouts/application.pug
 block content
   if isSignedIn()
     .container.mb-4.pl-0
-      a.btn.btn-success.mr-2(href=urlFor('newTask')) New status
+      a.btn.btn-success.mr-2(href=urlFor('newStatus')) New status
   table.table.table-stripped.bg-light
     thead
       tr
@@ -15,4 +15,4 @@ block content
           if !status.isSoftDeleted()
             td= status.id
             td= status.name
-              = a.badge.badge-danger.ml-2(href=urlFor('statusDelete', status.id), data-confirm="Are you sure?")= 'Delete status'
+              = a.badge.badge-danger.ml-2(href=urlFor('deleteStatus', status.id), data-confirm="Are you sure?")= 'Delete status'
