@@ -15,5 +15,22 @@ export default (router) => {
       ],
     });
     ctx.render('tasks', { tasks });
+  })
+  .get('findMy', '/findMy', async (ctx) => {
+    if (ctx.state.isSignedIn()) {
+      const id = ctx.session.userId;
+      const tasks = await Task.findAll({
+        include: [
+          { model: User, where: { id } },
+          { association: Creator, paranoid: false },
+          { model: TaskStatus, paranoid: false },
+          Tag,
+        ],
+      });
+      ctx.render('tasks', { tasks });
+    } else {
+      ctx.flash.set('You should sing IN or sign UP first.');
+      ctx.redirect(router.url('root'));
+    }
   });
 };
