@@ -1,21 +1,19 @@
 extends /layouts/application.pug
 
 block content
-  if isSignedIn()
-    .container.mb-4.pl-0
-      a.btn.btn-success.mr-2(href=urlFor('newStatus')) New status
-  table.table.table-stripped.bg-light
-    thead
-      tr
-        th Status Id
-        th Status name
-        th Actions
-    tbody
-      each status in statuses
+  .container.w-20.mx-auto
+    if isSignedIn()
+      .container.mb-4.pl-0
+        a.btn.btn-success.mr-2(href=urlFor('newStatus')) New status
+    table.table.table-stripped.bg-light
+      thead
         tr
-          if !status.isSoftDeleted()
-            td= status.id
-            td= status.name
-            td
-              a.badge.badge-primary.mr-2(href=urlFor('editStatus', status.id)= 'Rename'
-              a.badge.badge-danger.mr-2(href=urlFor('deleteStatus', status.id, data-confirm="Are you sure?")= 'Delete'
+          th Status Id
+          th Status name
+      tbody
+        each status in statuses
+          tr
+            if !status.isSoftDeleted()
+              td= status.id
+              td
+                a.badge.badge-primary.ml-2(href=urlFor('editStatus', status.id))= status.name
