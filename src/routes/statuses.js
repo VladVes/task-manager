@@ -27,7 +27,6 @@ export default (router) => {
       const newStatus = TaskStatus.build(data);
       try {
         await newStatus.save();
-        console.log("AFTER SAVING THE STATUS");
         ctx.flash.set('New status has been created successfully');
         ctx.redirect(router.url('statuses'));
       } catch (e) {

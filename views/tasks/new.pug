@@ -18,8 +18,8 @@ block content
           if statuses.length == 1
             option(selected value= statuses[0].id)= statuses[0].name
           else
-            - const fStatuses = statuses.slice(1)
-            each status in fStatuses
+            - const statTail = statuses.slice(1)
+            each status in statTail
               if status.name == 'new'
                 option(selected value= status.id)= status.name
               else

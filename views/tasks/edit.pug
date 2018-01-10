@@ -21,7 +21,8 @@ block content
         select.form-control(name="form[status]", id="status")
           if !f.object.TaskStatus.isSoftDeleted()
             option(selected value= f.object.TaskStatus.id)= f.object.TaskStatus.name
-          each status in statuses
+          - const statTail = statuses.slice(1)
+          each status in statTail
             if status.id !== f.object.TaskStatus.id && !status.isSoftDeleted()
               option(value= status.id)= status.name
       .form-group
