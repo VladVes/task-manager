@@ -6,9 +6,9 @@ export default (router) => {
   router.get('tasks', '/tasks', async (ctx) => {
     const tasks = await Task.findAll({
       include: [
-        {model: User, paranoid: false},
-        {association: Creator, paranoid: false},
-        TaskStatus,
+        { model: User, paranoid: false },
+        { association: Creator, paranoid: false },
+        { model: TaskStatus, paranoid: false },
         Tag,
       ],
     });
@@ -47,7 +47,12 @@ export default (router) => {
   .get('task', '/task/:taskId', async (ctx) => {
     const { taskId: id } = ctx.params;
     const task = await Task.findById(id, {
-      include: [{model: User, paranoid: false}, Creator, TaskStatus, Tag],
+      include: [
+        { model: User, paranoid: false },
+        Creator,
+        { model: TaskStatus, paranoid: false },
+        Tag,
+      ],
     });
     task.tags = task.Tags.map(tag => tag.name).join(', ');
     const users = await User.findAll({ paranoid: false });
