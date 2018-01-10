@@ -14,8 +14,24 @@ export default (router) => {
   })
   .get('newStatus', '/staus/new', async (ctx) => {
     if (ctx.state.isSignedIn()) {
-      const status = Task.build();
+      const status = TaskStatus.build();
       ctx.render('statuses/new', { f: buildFormObj(status) });
+    } else {
+      ctx.flash.set('You should sing IN or sign UP first.');
+      ctx.redirect(router.url('root'));
+    }
+  })
+  .post('saveStatus', '/statuses', async (ctx) => {
+    if (ctx.state.isSignedIn()) {
+      const data = ctx.request.body.form;
+      const newStatus = TaskStatus.build(data, { include: [Tag] });
+      try {
+        await TaskStatus.save();
+        ctx.flash.set('New status has been created successfully');
+        ctx.redirect(router.url('statuses'));
+      } catch (e) {
+        ctx.render('statuses/new', { f: buildFormObj(newStatus, e) });
+      }
     } else {
       ctx.flash.set('You should sing IN or sign UP first.');
       ctx.redirect(router.url('root'));
