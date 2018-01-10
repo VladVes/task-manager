@@ -18,7 +18,6 @@ block content
           = f.object.description
       .form-group
         label(for="status") Status
-        = statuses.length
         select.form-control(name="form[status]", id="status")
           if !f.object.TaskStatus.isSoftDeleted() && f.object.TaskStatus.id !== 1
             option(selected value= f.object.TaskStatus.id)= f.object.TaskStatus.name
