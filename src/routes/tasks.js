@@ -18,7 +18,8 @@ export default (router) => {
     if (ctx.state.isSignedIn()) {
       const task = Task.build();
       const users = await User.findAll();
-      ctx.render('tasks/new', { f: buildFormObj(task), users });
+      const statuses = await TaskStatus.findAll();
+      ctx.render('tasks/new', { f: buildFormObj(task), users, statuses });
     } else {
       ctx.flash.set('You should sing IN or sign UP first.');
       ctx.redirect(router.url('root'));
