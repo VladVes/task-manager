@@ -1,8 +1,6 @@
 import getLogger from '../lib/log';
 import buildFormObj from '../lib/formObjectBuilder';
-import { Task, Tag, User, Creator, TaskStatus, Sequelize } from '../models';
-
-const Op = Sequelize.Op;
+import { Task, Tag, User, Creator, TaskStatus, Op } from '../models';
 
 export default (router) => {
   router.get('tasks', '/tasks', async (ctx) => {

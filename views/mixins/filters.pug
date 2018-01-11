@@ -8,7 +8,6 @@ mixin filter(users, statuses, options = { url: urlFor('filter') })
           each user in users
             option(value= user.id)= user.fullName()
       label(for=`assignedTo`) Assigned to
-        Assigned to
         select.form-control(name="assignedTo", id="assignedTo")
           option(selected value= 0)= ''
           each user in users
@@ -19,6 +18,6 @@ mixin filter(users, statuses, options = { url: urlFor('filter') })
           each status in statuses
             option(value= status.id)= status.name
       label= `Include tags:`
-        input.form-control(name='tags' type='text' placeholder=`big, alpha, delta, bang`)
+        input.form-control(name='tags' type='text' size='50' placeholder=`big, alpha, delta, bang`)
     .form-group
       input.btn.btn-primary(type="submit" value="Find")
