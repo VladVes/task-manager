@@ -29,22 +29,33 @@ export default (router) => {
   .post('saveTask', '/tasks', async (ctx) => {
     if (ctx.state.isSignedIn()) {
       const data = ctx.request.body.form;
-      const tagNames = data.tags.split(',').map(tag => tag.trim());
-      const existingTags = await Tag.findAll({
-        where: { name: { [Op.or]: tagNames } },
-      });
-      const existingTagNames = existingTags.map(tag => tag.name);
-      data.Tags = tagNames.filter(name => !existingTagNames.includes(name))
-        .map(name => ({ name }));
+      let existingTags = [];
+      if (data.tags) {
+        const tagNames = data.tags.split(',').map(tag => tag.trim());
+        const existingTags = await Tag.findAll({
+          where: { name: { [Op.or]: tagNames } },
+        });
+        const existingTagNames = existingTags.map(tag => tag.name);
+        data.Tags = tagNames.filter(name => !existingTagNames.includes(name))
+          .map(name => ({ name }));
+        console.log("++++++++++++++++TAGS IN TASK+++++++++++++++++++++");
+        console.log(data.Tags);
+      }
 
       data.creator = ctx.session.userId;
       const newTask = Task.build(data, { include: [Tag] });
       newTask.addTag(existingTags);
+      console.log("++++++++++++++++TASK BEFORE SAVING+++++++++++++++++++++");
+      console.log(newTask);
       try {
         await newTask.save();
+        console.log("++++++++++++++++TASK SAVED+++++++++++++++++++++");
         ctx.flash.set('New task has been created successfully');
         ctx.redirect(router.url('tasks'));
       } catch (e) {
+        console.log("++++++++++++++++FROM CATCH+++++++++++++++++++++");
+        console.log("+++++++++++++++++++++NEW TASK: ", newTask);
+        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!ERRORS when SAVE TASK: ", e)
         const statuses = await TaskStatus.findAll();
         const users = await User.findAll();
         ctx.render('tasks/new', { f: buildFormObj(newTask, e), users, statuses });
