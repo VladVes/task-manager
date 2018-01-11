@@ -3,7 +3,7 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('TaskStatuses', [
-      { name: 'undefined (you should create new status)' },
+      { name: 'undefined' },
       { name: 'new' },
       { name: 'in work' },
       { name: 'on testing' },

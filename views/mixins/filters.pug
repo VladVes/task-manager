@@ -1,8 +1,24 @@
-mixin filter(options = { url: urlFor('filter'), method: 'get' })
+mixin filter(users, statuses, options = { url: urlFor('filter') })
   - const url = _.get(options, 'url');
-  - const method = _.get(options, 'method', 'get').toLowerCase();
-  - const isStandart = _.includes(['get', 'post'], method);
-  form(action= url method= isStandart ? method : 'post')
-    if !isStandart
-      input(name='_method' type='hidden' value= method)
-    block
+  form(action= url method= 'get')
+    .form-group
+      label(for=`creator`) Creator
+        select.form-control(name="creator", id="creator")
+          option(selected value= 0)= ''
+          each user in users
+            option(value= user.id)= user.fullName()
+      label(for=`assignedTo`) Assigned to
+        Assigned to
+        select.form-control(name="assignedTo", id="assignedTo")
+          option(selected value= 0)= ''
+          each user in users
+            option(value= user.id)= user.fullName()
+      label(for=`status`) Task status
+        select.form-control(name="status", id="status")
+          option(selected value= 0)= ''
+          each status in statuses
+            option(value= status.id)= status.name
+      label= `Include tags:`
+        input.form-control(name='tags' type='text' placeholder=`big, alpha, delta, bang`)
+    .form-group
+      input.btn.btn-primary(type="submit" value="Find")

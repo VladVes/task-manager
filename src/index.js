@@ -19,6 +19,7 @@ import KeyGrip from 'keygrip';
 import addRoutes from './routes';
 import getLogger from './lib/log';
 import getWebpackConfig from '../webpack.config.babel';
+import { Task, Tag, User, TaskStatus } from './models';
 
 export default () => {
   const app = new Koa();
@@ -37,6 +38,12 @@ export default () => {
       ctx.state = {
         flash: ctx.flash,
         isSignedIn: () => ctx.session.userId !== undefined,
+        cashedData: {
+          users: await User.findAll(),
+          tasks: await Task.findAll(),
+          statuses: await TaskStatus.findAll(),
+          tags: await Tag.findAll(),
+        },
       };
       await next();
     } catch (err) {

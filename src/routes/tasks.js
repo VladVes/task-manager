@@ -14,6 +14,7 @@ export default (router) => {
         Tag,
       ],
     });
+
     ctx.render('tasks', { tasks });
   })
   .get('newTask', '/tasks/new', async (ctx) => {
@@ -48,7 +49,6 @@ export default (router) => {
       } catch (e) {
         const statuses = await TaskStatus.findAll();
         const users = await User.findAll();
-        console.log("!!!!!!!!!!!!!!!!!!!!ERROR: ", e);
         ctx.render('tasks/new', { f: buildFormObj(newTask, e), users, statuses });
       }
     } else {

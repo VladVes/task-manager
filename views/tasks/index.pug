@@ -8,6 +8,7 @@ block content
       a.btn.btn-primary.mr-2(href=urlFor('tasks')) All tasks
       a.btn.btn-primary.mr-2(href=urlFor('findMy')) My tasks
       a.btn.btn-info.float-right(href=urlFor('statuses')) Statuses
+  +filter(cashedData.users, cashedData.statuses)
   table.table.table-stripped.bg-light
     thead
       tr

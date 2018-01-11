@@ -32,5 +32,22 @@ export default (router) => {
       ctx.flash.set('You should sing IN or sign UP first.');
       ctx.redirect(router.url('root'));
     }
+  }).get('filter', '/filter', async (ctx) => {
+    if (ctx.state.isSignedIn()) {
+      const data = ctx.request.query;
+      console.log("!!!!!!!!!!!!!!!!!!!!!Q STRING: ", data);
+      const tasks = await Task.findAll({
+        include: [
+          { model: User, where: { id: data.assignedTo } },
+          { association: Creator, where: { id: data.creator } },
+          { model: TaskStatus, where: { id: data.status } },
+          Tag,
+        ],
+      });
+      ctx.render('tasks', { tasks });
+    } else {
+      ctx.flash.set('You should sing IN or sign UP first.');
+      ctx.redirect(router.url('root'));
+    }
   });
 };
