@@ -12,6 +12,8 @@ block content
       .form-group
         label(for="description") Description
         textarea.form-control(name="form[description]", rows="8", id="description")
+          if f.object.description
+            = f.object.description
       .form-group
         - const statuses = cashedData.statuses
         label(for="status") Status
