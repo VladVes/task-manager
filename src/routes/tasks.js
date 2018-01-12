@@ -12,15 +12,12 @@ export default (router) => {
         Tag,
       ],
     });
-
     ctx.render('tasks', { tasks });
   })
   .get('newTask', '/tasks/new', async (ctx) => {
     if (ctx.state.isSignedIn()) {
       const task = Task.build();
-      const users = await User.findAll();
-      const statuses = await TaskStatus.findAll();
-      ctx.render('tasks/new', { f: buildFormObj(task), users, statuses });
+      ctx.render('tasks/new', { f: buildFormObj(task) });
     } else {
       ctx.flash.set('You should sing IN or sign UP first.');
       ctx.redirect(router.url('root'));
@@ -47,9 +44,7 @@ export default (router) => {
         ctx.flash.set('New task has been created successfully');
         ctx.redirect(router.url('tasks'));
       } catch (e) {
-        const statuses = await TaskStatus.findAll();
-        const users = await User.findAll();
-        ctx.render('tasks/new', { f: buildFormObj(task, e), users, statuses });
+        ctx.render('tasks/new', { f: buildFormObj(task, e) });
       }
     } else {
       ctx.flash.set('You should sing IN or sign UP first.');
@@ -67,9 +62,7 @@ export default (router) => {
       ],
     });
     task.tags = task.Tags.map(tag => tag.name).join(', ');
-    const users = await User.findAll({ paranoid: false });
-    const statuses = await TaskStatus.findAll();
-    ctx.render('tasks/edit', { f: buildFormObj(task), users, statuses });
+    ctx.render('tasks/edit', { f: buildFormObj(task) });
   })
   .patch('editTask', '/tasks/edit/:taskId', async (ctx) => {
     if (ctx.state.isSignedIn()) {
@@ -88,9 +81,7 @@ export default (router) => {
         ctx.flash.set('Task updated successfully.');
         ctx.redirect(router.url('tasks'));
       } catch (e) {
-        const users = await User.findAll();
-        const statuses = await TaskStatus.findAll();
-        ctx.render('tasks/edit', { f: buildFormObj(task, e), users, statuses });
+        ctx.render('tasks/edit', { f: buildFormObj(task, e) });
       }
     } else {
       ctx.flash.set('You should sing IN or sign UP first.');
