@@ -44,6 +44,7 @@ export default (router) => {
         ctx.flash.set('New task has been created successfully');
         ctx.redirect(router.url('tasks'));
       } catch (e) {
+        task.tags = data.tags;
         ctx.render('tasks/new', { f: buildFormObj(task, e) });
       }
     } else {
