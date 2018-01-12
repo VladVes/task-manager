@@ -1,9 +1,9 @@
 extends /layouts/application.pug
 
 block content
-  a.btn.btn-primary.mr-2(href=urlFor('tasks')) All tasks
-  if isSignedIn()
-    .container.mb-4.pl-0
+  .container.mb-4.pl-0
+    a.btn.btn-primary.mr-2(href=urlFor('tasks')) All tasks
+    if isSignedIn()
       a.btn.btn-success.mr-2(href=urlFor('newTask')) New task
       a.btn.btn-primary.mr-2(href=urlFor('findMy')) My tasks
       a.btn.btn-info.float-right(href=urlFor('statuses')) Statuses

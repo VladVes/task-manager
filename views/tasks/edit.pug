@@ -1,6 +1,8 @@
 extends /layouts/application.pug
 
 block content
+  - const users = cashedData.users
+  - const statuses = cashedData.statuses
   .container.w-60.mx-auto
     +formFor(f, { url: urlFor('editTask', f.object.id), method: 'patch' })
       +input(f, 'name')

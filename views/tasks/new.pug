@@ -7,12 +7,13 @@ block content
       .form-group
         label(for="assignedTo") Assign to:
         select.form-control(name="form[assignedTo]", id="assignedTo")
-          each user in users
+          each user in cashedData.users
             option(value= user.id)= user.fullName()
       .form-group
         label(for="description") Description
         textarea.form-control(name="form[description]", rows="8", id="description")
       .form-group
+        - const statuses = cashedData.statuses
         label(for="status") Status
         select.form-control(name="form[status]", id="status")
           if statuses.length == 1
