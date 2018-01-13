@@ -28,6 +28,12 @@ describe('base requests', () => {
     expect(res).toHaveHTTPStatus(200);
   });
 
+  it('GET 302', async () => {
+    let res;
+    res = await request.agent(server).get('/user/profile');
+    expect(res).toHaveHTTPStatus(302);
+  });
+
   it('GET 404', async () => {
     const res = await request.agent(server).get('/wrong-path');
     expect(res).toHaveHTTPStatus(404);
