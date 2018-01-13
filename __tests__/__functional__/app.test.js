@@ -11,7 +11,6 @@ describe('base requests', () => {
 
   beforeEach(() => {
     server = app().listen();
-    //console.log(server);
   });
 
   it('GET 200', async () => {
