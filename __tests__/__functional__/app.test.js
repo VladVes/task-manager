@@ -1,6 +1,5 @@
 import request from 'supertest';
 import matchers from 'jest-supertest-matchers';
-
 import app from '../../src/';
 
 describe('base requests', () => {
@@ -12,17 +11,21 @@ describe('base requests', () => {
 
   beforeEach(() => {
     server = app().listen();
+    //console.log(server);
   });
 
-  it('GET 200/302', async () => {
-    const res0 = await request.agent(server).get('/');
-    const res2 = await request.agent(server).get('/users/new');
-    const res3 = await request.agent(server).get('/user/profile');
-    const res4 = await request.agent(server).get('/session/new');
-    expect(res0).toHaveHTTPStatus(200);
-    expect(res2).toHaveHTTPStatus(200);
-    expect(res3).toHaveHTTPStatus(302);
-    expect(res4).toHaveHTTPStatus(200);
+  it('GET 200', async () => {
+    let res;
+    res = await request.agent(server).get('/');
+    expect(res).toHaveHTTPStatus(200);
+    res = await request.agent(server).get('/users');
+    expect(res).toHaveHTTPStatus(200);
+    res = await request.agent(server).get('/tasks');
+    expect(res).toHaveHTTPStatus(200);
+    res = await request.agent(server).get('/users/new');
+    expect(res).toHaveHTTPStatus(200);
+    res = await request.agent(server).get('/session/new');
+    expect(res).toHaveHTTPStatus(200);
   });
 
   it('GET 404', async () => {
