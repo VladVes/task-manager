@@ -13,7 +13,6 @@ import methodOverride from 'koa-methodoverride';
 import serve from 'koa-static';
 import koaLogger from 'koa-logger';
 import Pug from 'koa-pug';
-import dotenv from 'dotenv';
 import KeyGrip from 'keygrip';
 
 import addRoutes from './routes';
@@ -24,8 +23,6 @@ import { Task, Tag, User, TaskStatus } from './models';
 export default () => {
   const app = new Koa();
   const rollbar = new Rollbar('d127b6e52cdd4ebcaea93d684c756d7e');
-
-  dotenv.config();
   const log = getLogger('App');
 
   app.keys = new KeyGrip(['shtirlitz', 'has come', 'to sing cookies'], 'sha256');
@@ -33,8 +30,6 @@ export default () => {
   app.use(flash());
   app.use(async (ctx, next) => {
     try {
-      rollbar.log('Starting application...');
-      log('Starting up...');
       ctx.state = {
         flash: ctx.flash,
         isSignedIn: () => ctx.session.userId !== undefined,
@@ -47,6 +42,7 @@ export default () => {
       };
       await next();
     } catch (err) {
+      console.log("ERROR: ", err);
       log('Error: ', err);
       rollbar.error(err, ctx.request);
     }
