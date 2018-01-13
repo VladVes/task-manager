@@ -29,8 +29,7 @@ describe('base requests', () => {
   });
 
   it('GET 302', async () => {
-    let res;
-    res = await request.agent(server).get('/user/profile');
+    const res = await request.agent(server).get('/user/profile');
     expect(res).toHaveHTTPStatus(302);
   });
 
