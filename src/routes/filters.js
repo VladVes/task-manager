@@ -1,5 +1,3 @@
-import getLogger from '../lib/log';
-import buildFormObj from '../lib/formObjectBuilder';
 import { Task, Tag, User, Creator, TaskStatus, Op } from '../models';
 
 export default (router) => {
@@ -16,24 +14,24 @@ export default (router) => {
     });
     ctx.render('tasks', { tasks });
   })
-  .get('findMy', '/findMy', async (ctx) => {
-    if (ctx.state.isSignedIn()) {
-      const id = ctx.session.userId;
-      const tasks = await Task.findAll({
-        include: [
-          { model: User, where: { id } },
-          { association: Creator, paranoid: false },
-          { model: TaskStatus, paranoid: false },
-          Tag,
-        ],
-      });
-      ctx.render('tasks', { tasks });
-    } else {
-      ctx.flash.set('You should sing IN or sign UP first.');
-      ctx.redirect(router.url('root'));
-    }
-  })
-  .get('filter', '/filter', async (ctx) => {
+    .get('findMy', '/findMy', async (ctx) => {
+      if (ctx.state.isSignedIn()) {
+        const id = ctx.session.userId;
+        const tasks = await Task.findAll({
+          include: [
+            { model: User, where: { id } },
+            { association: Creator, paranoid: false },
+            { model: TaskStatus, paranoid: false },
+            Tag,
+          ],
+        });
+        ctx.render('tasks', { tasks });
+      } else {
+        ctx.flash.set('You should sing IN or sign UP first.');
+        ctx.redirect(router.url('root'));
+      }
+    })
+    .get('filter', '/filter', async (ctx) => {
       const data = ctx.request.query;
       const query = [
         { model: User, paranoid: false },
@@ -42,7 +40,7 @@ export default (router) => {
         { model: Tag },
       ];
       const tagNames = data.tags.split(',').map(tag => tag.trim());
-      for (const param in data) {
+      Object.keys(data).forEach((param) => {
         if (data[param] !== '0' && data[param] !== '') {
           switch (param) {
             case 'assignedTo':
@@ -61,11 +59,11 @@ export default (router) => {
               break;
           }
         }
-      }
-      
+      });
+
       const tasks = await Task.findAll({
         include: query,
       });
       ctx.render('tasks', { tasks });
-  });
+    });
 };
