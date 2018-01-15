@@ -42,7 +42,6 @@ export default (router) => {
         { model: Tag },
       ];
       const tagNames = data.tags.split(',').map(tag => tag.trim());
-      console.log("!!!!!!!!!!!!!PREPARED TAG NAMES: ", tagNames);
       for (const param in data) {
         if (data[param] !== '0' && data[param] !== '') {
           switch (param) {
