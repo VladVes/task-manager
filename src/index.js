@@ -40,18 +40,9 @@ export default () => {
           tags: await Tag.findAll(),
         },
       };
-      console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-      console.log("IS SIGNED IN: ", ctx.session.userId !== undefined);
-      console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-      console.log("COOKIES:");
-      console.log(ctx.cookies.request.headers);
-      console.log(ctx.cookies.request.url);
-      console.log(ctx.cookies.request.method);
-      console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-
       await next();
     } catch (err) {
-      console.log("APPLICATION ERROR : ", err);
+      //console.log("APPLICATION ERROR : ", err);
       log('Error: ', err);
       rollbar.error(err, ctx.request);
     }
