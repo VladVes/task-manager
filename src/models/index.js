@@ -3,7 +3,7 @@ import path from 'path';
 import Sequelize from 'sequelize';
 import dotenv from 'dotenv';
 import getLogger from '../lib/log';
-import dbInit from '../../migrations';
+import dbInit from '../lib/dbMigrate';
 
 dotenv.config();
 const basename  = path.basename(__filename);

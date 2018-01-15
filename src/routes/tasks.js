@@ -38,9 +38,9 @@ export default (router) => {
       }
       data.creator = ctx.session.userId;
       const task = Task.build(data, { include: [Tag] });
-      task.addTags(existingTags);
       try {
         await task.save();
+        task.addTags(existingTags);
         ctx.flash.set('New task created successfully');
         ctx.redirect(router.url('tasks'));
       } catch (e) {
