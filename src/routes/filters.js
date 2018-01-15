@@ -62,7 +62,7 @@ export default (router) => {
           }
         }
       }
-      console.log("!!!!!!!!!!!!!PREPAED QUETY: ", query);
+      
       const tasks = await Task.findAll({
         include: query,
       });
