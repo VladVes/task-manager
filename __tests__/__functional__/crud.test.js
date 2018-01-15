@@ -27,14 +27,8 @@ describe('base requests', () => {
         'form[email]': 'mail@mail.com',
         'form[password]': '111',
       });
-    console.log("!!!!!!!!!!!!!!!!==============================================================================");
-    console.log("====FIRST COOKIE: ", res.headers['set-cookie']);
-
-    cookie = prepareCookie(res);
-
-    console.log("PREPARED: ", `${cookie.sid} ${cookie.sig}`);
-    console.log("!!!!!!!!!!!!!!!!===========================================================================");
     expect(res).toHaveHTTPStatus(302);
+    cookie = prepareCookie(res);
   });
 
   it('login (POST /session)', async () => {
@@ -43,30 +37,13 @@ describe('base requests', () => {
       .send({ 'form[email]': 'mail@mail.com', 'form[password]': '111' })
       .set('Cookie', cookie);
     expect(res).toHaveHTTPStatus(302);
-    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!COOKIES: ", cookie);
   });
 
-/*
-  cookie: 'koa.sid=XodV8lNs3fTQoQUgr1RpdGa2_lbCPWyX; koa.sid.sig=vlhH4fKaS6NKLVHMLBuDapqLbutZwfipu-gHi-zrV4Q'
-
-  koa.sid=zfXNXaUAQ-1spGfQwQKWLDuHS3hn30-W;
-  koa.sid.sig=uQsvXXwwr4O2AIuyznD0pIZTPTF-gij6eLp_9jr6rno;
-
-*/
-
-  it('should get user profile', async () => {
-    const res2 = await agent.get('/user/profile')
+  it('get user profile (GET /user/profile)', async () => {
+    const res = await agent.get('/user/profile')
         .set('Accept', '*/*')
-        .set('Cookie', cookie)
-        .set('Connecton', 'close');
-    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!RESPONSE: ", res2.text);
-    console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++AGEN AFTER:");
-    console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-    console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-    console.log("=========================================================================");
-    console.log("====COOKIE FROM GET PROFILE: ", res2.headers['set-cookie'][0]);
-    console.log("=========================================================================");
-    expect(res2).toHaveHTTPStatus(200);
+        .set('Cookie', cookie);
+    expect(res).toHaveHTTPStatus(200);
   });
 
   afterAll((done) => {
