@@ -169,6 +169,34 @@ describe('Entyties CRUD', () => {
     expect(res).toHaveHTTPStatus(404);
   });
 
+  it('find by tag (GET /findByTag/:tagId)', async () => {
+    const res = await agent.get('/findByTag/1')
+      .set('Cookie', cookie);
+    expect(res).toHaveHTTPStatus(200);
+  });
+
+  it('find by tag (error!) (GET /findByTag/:tagId)', async () => {
+    const res = await agent.get('/findByTag/1000')
+      .set('Cookie', cookie);
+    expect(res).toHaveHTTPStatus(404);
+  });
+
+  it('find my (GET /findMy)', async () => {
+    const res = await agent.get('/findMy')
+      .set('Cookie', cookie);
+    expect(res).toHaveHTTPStatus(200);
+  });
+
+  it('filter (GET /filter)', async () => {
+    const res = await agent.get('/filter')
+      .query({ creator: 555 })
+      .query({ assignedTo: 555 })
+      .query({ status: 1000 })
+      .query({ tags: 'tag1' })
+      .set('Cookie', cookie);
+      expect(res).toHaveHTTPStatus(200);
+  });
+
   it('delete task (DELETE /tasks/delete/:taskId)', async () => {
     const res = await agent.delete('/tasks/delete/1000')
       .set('Cookie', cookie);
