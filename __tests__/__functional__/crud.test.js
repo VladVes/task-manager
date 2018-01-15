@@ -48,7 +48,52 @@ describe('base requests', () => {
     expect(res).toHaveHTTPStatus(200);
   });
 
+  it('edit user profile (PATCH /user/profile)', async () => {
+    const res = await agent.patch('/user/profile')
+      .type('form')
+      .send({
+        'form[name]': 'ailA@mailB.com',
+        'form[firstName]': 'Alpha',
+        'form[lastName]': 'Beta',
+        'form[password]': '333',
+      })
+      .set('Cookie', cookie);
+    expect(res).toHaveHTTPStatus(302);
+  });
 
+  it('add new status (POST /statuses)', async () => {
+    const res = await agent.post('/statuses')
+      .type('form')
+      .send({ 'form[name]': 'new' })
+      .set('Cookie', cookie);
+    expect(res).toHaveHTTPStatus(302);
+  });
+
+  it('get statuses (GET /statuses)', async () => {
+    const res = await agent.get('/statuses')
+      .set('Cookie', cookie);
+    expect(res).toHaveHTTPStatus(200);
+  });
+
+
+
+  it('get new task (GET /tasks/new)', async () => {
+    const res = await agent.get('/tasks/new')
+      .set('Cookie', cookie);
+    expect(res).toHaveHTTPStatus(200);
+  });
+
+  it('get tasks (GET /tasks)', async () => {
+    const res = await agent.get('/tasks')
+      .set('Cookie', cookie);
+    expect(res).toHaveHTTPStatus(200);
+  });
+
+  it('delete user profile (DELETE /user/delete)', async () => {
+    const res = await agent.delete('/user/delete')
+      .set('Cookie', cookie);
+    expect(res).toHaveHTTPStatus(302);
+  });
 
   afterAll((done) => {
     server.close();
