@@ -8,7 +8,7 @@ const prepareCookie = (res) => {
   return `${sid} ${sig}`;
 };
 
-describe('base requests', () => {
+describe('Entyties CRUD', () => {
   let server;
   let agent;
   let cookie;
@@ -75,7 +75,43 @@ describe('base requests', () => {
     expect(res).toHaveHTTPStatus(200);
   });
 
+  it('get new status form (GET /statuses/new)', async () => {
+    const res = await agent.get('/statuses/new')
+      .set('Cookie', cookie);
+    expect(res).toHaveHTTPStatus(200);
+  });
 
+  it('get status edit (GET /status/:statusId)', async () => {
+    const res = await agent.get('/status/1')
+      .set('Cookie', cookie);
+    expect(res).toHaveHTTPStatus(200);
+  });
+
+  it('get status edit (error!) (GET /status/:statusId)', async () => {
+    const res = await agent.get('/status/111')
+      .set('Cookie', cookie);
+    expect(res).toHaveHTTPStatus(404);
+  });
+
+  it('edit status (PATCH /status/edit/:statusId)', async () => {
+    const res = await agent.patch('/status/edit/1')
+      .type('form')
+      .send({ 'form[name]': 'super new' })
+      .set('Cookie', cookie);
+    expect(res).toHaveHTTPStatus(302);
+  });
+
+  it('delete status (DELETE /status/delete/:statusId)', async () => {
+    const res1 = await agent.post('/statuses')
+      .type('form')
+      .send({ 'form[name]': 'temp Statuse' })
+      .set('Cookie', cookie);
+    expect(res1).toHaveHTTPStatus(302);
+
+    const res2 = await agent.delete('/status/delete/2')
+      .set('Cookie', cookie);
+    expect(res2).toHaveHTTPStatus(302);
+  });
 
   it('get new task (GET /tasks/new)', async () => {
     const res = await agent.get('/tasks/new')
@@ -83,10 +119,60 @@ describe('base requests', () => {
     expect(res).toHaveHTTPStatus(200);
   });
 
+  it('create task (POST /tasks)', async () => {
+    const res = await agent.post('/tasks')
+      .type('form')
+      .send({
+        'form[id]': 1000,
+        'form[name]': 'First Task',
+        'form[description]': 'Alpha task',
+        'form[status]': 1,
+        'form[creator]': 555,
+        'form[assignedTo]': 555,
+        'form[tags]': 'tag1, tag2, tag3',
+      })
+      .set('Cookie', cookie);
+    expect(res).toHaveHTTPStatus(302);
+  });
+
   it('get tasks (GET /tasks)', async () => {
     const res = await agent.get('/tasks')
       .set('Cookie', cookie);
     expect(res).toHaveHTTPStatus(200);
+  });
+
+  it('get task (GET /task/:taskId)', async () => {
+    const res = await agent.get('/task/1000')
+      .set('Cookie', cookie);
+    expect(res).toHaveHTTPStatus(200);
+  });
+
+  it('edit task (PATCH /tasks/edit/:taskId)', async () => {
+    const res = await agent.patch('/tasks/edit/1000')
+      .type('form')
+      .send({
+        'form[name]': 'First Task updated',
+        'form[description]': 'New alpha task',
+        'form[status]': 1,
+        'form[creator]': 555,
+        'form[assignedTo]': 555,
+      })
+      .set('Cookie', cookie);
+    expect(res).toHaveHTTPStatus(302);
+  });
+
+  it('edit task (error!) (PATCH /tasks/edit/:taskId)', async () => {
+    const res = await agent.patch('/tasks/edit/1001')
+      .type('form')
+      .send({})
+      .set('Cookie', cookie);
+    expect(res).toHaveHTTPStatus(404);
+  });
+
+  it('delete task (DELETE /tasks/delete/:taskId)', async () => {
+    const res = await agent.delete('/tasks/delete/1000')
+      .set('Cookie', cookie);
+    expect(res).toHaveHTTPStatus(302);
   });
 
   it('delete user profile (DELETE /user/delete)', async () => {
