@@ -41,7 +41,7 @@ export default (router) => {
       task.addTags(existingTags);
       try {
         await task.save();
-        ctx.flash.set('New task has been created successfully');
+        ctx.flash.set('New task created successfully');
         ctx.redirect(router.url('tasks'));
       } catch (e) {
         task.tags = data.tags;
