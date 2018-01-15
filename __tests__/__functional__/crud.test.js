@@ -9,12 +9,14 @@ const prepareCookie = (res) => {
 };
 
 describe('base requests', () => {
+  let server;
   let agent;
   let cookie;
 
   beforeAll(() => {
     jasmine.addMatchers(matchers);
-    agent = request.agent(app().listen());
+    server = app().listen();
+    agent = request.agent(server);
   });
 
   it('new user (POST /users)', async () => {
@@ -45,6 +47,8 @@ describe('base requests', () => {
         .set('Cookie', cookie);
     expect(res).toHaveHTTPStatus(200);
   });
+
+
 
   afterAll((done) => {
     server.close();
