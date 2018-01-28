@@ -9,3 +9,7 @@ Basicly it's the CRUD wich can manipulate such entities as users, tasks, statuse
 This app is build around Koa micro-framework and also use Sequelize ORM. 
 It deploed on heroku.com and availabel at https://vvv-taskmanager.herokuapp.com
 ```
+## Install:
+```
+make install
+```
