@@ -13,3 +13,11 @@ It deploed on heroku.com and availabel at https://vvv-taskmanager.herokuapp.com
 ```
 make install
 ```
+## Db migration:
+```
+make migrate
+```
+## Run:
+```
+make start
+```
