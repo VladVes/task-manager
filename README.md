@@ -4,7 +4,7 @@
 
 ## Task Manager
 ```
-This app allows you to manage your tasks.
+This app allows you to create and manage your tasks.
 Basicly it's the CRUD wich can manipulate such entities as users, tasks, statuses. 
 This app is build around Koa micro-framework and also use Sequelize ORM. 
 It deploed on heroku.com and availabel at https://vvv-taskmanager.herokuapp.com
