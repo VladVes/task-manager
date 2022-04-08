@@ -89,7 +89,7 @@
     "koa-static": "*",
     "koa-webpack": "*",
     "lodash": "^4.17.4",
-    "moment": "^2.19.4",
+    "moment": "^2.29.2",
     "mysql2": "^1.5.1",
     "pg": "^7.4.0",
     "popper": "^1.0.1",
